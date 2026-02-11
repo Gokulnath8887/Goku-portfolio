@@ -1,9 +1,12 @@
 {
     "name": "goku-portfolio",
     "private": true,
+    "workspaces": [
+        "apps/*"
+    ],
     "scripts": {
-        "build": "npm run build --prefix apps/web",
-        "dev": "npm run dev --prefix apps/web",
-        "start": "npm run start --prefix apps/web"
+        "build": "npm run build --workspace=web",
+        "dev": "npm run dev --workspace=web",
+        "start": "npm run start --workspace=web"
     }
 }
