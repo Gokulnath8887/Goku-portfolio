@@ -15,6 +15,14 @@ import { Toaster, toast } from "sonner";
 
 const SKILLS = [
   {
+    name: "HTML5",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+  },
+  {
+    name: "CSS3",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+  },
+  {
     name: "Tailwind CSS",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
   },
@@ -25,18 +33,6 @@ const SKILLS = [
   {
     name: "SCSS / SASS",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg",
-  },
-  {
-    name: "CSS3",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-  },
-  {
-    name: "Flexbox",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-  },
-  {
-    name: "CSS Grid",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
   },
   {
     name: "React.js",
@@ -53,6 +49,10 @@ const SKILLS = [
   {
     name: "JavaScript",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+  },
+  {
+    name: "Java",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
   },
   {
     name: "Framer Motion",
@@ -90,28 +90,33 @@ const SKILLS = [
 
 const PROJECTS = [
   {
-    title: "E-Commerce Suite",
-    description: "Full-stack platform with real-time inventory and payments.",
-    tech: ["Next.js", "Node.js", "PostgreSQL"],
-    link: "#",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop",
+    title: "Just Fly Broadband",
+    description: "A high-performance broadband network management system for local ISP services.",
+    tech: ["React", "Tailwind", "Vite"],
+    link: "https://justfly-eight.vercel.app",
+    image: "https://images.unsplash.com/photo-1544627836-822bfe450209?w=800&auto=format&fit=crop",
   },
   {
-    title: "Freelance Portal",
-    description: "Bridging the gap between developers and global clients.",
-    tech: ["React", "Tailwind", "Firebase"],
-    link: "#",
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop",
+    title: "Siddh Clinic",
+    description: "A comprehensive management system for clinical services and patient workflows.",
+    tech: ["Next.js", "PostgreSQL", "Tailwind"],
+    link: "https://siddha-royal-flow.vercel.app",
+    image: "https://images.unsplash.com/photo-1538108197017-c1b89c0ef319?w=800&auto=format&fit=crop",
   },
   {
-    title: "SaaS Dashboard",
-    description: "Highly interactive analytics engine for startup growth.",
-    tech: ["Angular", "Vite", "D3.js"],
-    link: "#",
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop",
+    title: "Eppo Varum Bus Tracker",
+    description: "Real-time transport tracking application for urban commuters.",
+    tech: ["React Native", "Firebase", "Maps API"],
+    link: "https://eppo-varum-bus-tracker.vercel.app",
+    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&auto=format&fit=crop",
+  },
+  {
+    title: "Dazzle Deals",
+    description: "Integrated with database and with admin panel to manage images of the website and manage customer query orders.",
+    tech: ["Next.js", "Supabase", "Stripe"],
+    link: "https://dazzle-deals.vercel.app",
+    image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1200&auto=format&fit=crop",
+    isMasterpiece: true,
   },
 ];
 
@@ -141,8 +146,9 @@ export default function PortfolioPage() {
         <div className="flex gap-8 items-center bg-white/5 backdrop-blur-xl px-6 py-3 rounded-full border border-white/10">
           <motion.a
             whileHover={{ y: -1 }}
-            href="https://github.com"
+            href="https://github.com/Gokulnath8887"
             target="_blank"
+            rel="noopener noreferrer"
             className="text-gray-400 hover:text-white transition-colors"
           >
             <Github size={20} />
@@ -223,9 +229,14 @@ export default function PortfolioPage() {
               transition={{ delay: 0.6 }}
               className="flex gap-6"
             >
-              <button className="px-10 py-4 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-all flex items-center gap-2 text-sm">
+              <motion.a
+                href="mailto:gokul9g0t@gmail.com"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-10 py-4 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-all flex items-center gap-2 text-sm"
+              >
                 Get in touch <ChevronRight size={16} />
-              </button>
+              </motion.a>
             </motion.div>
           </motion.div>
         </section>
@@ -247,20 +258,23 @@ export default function PortfolioPage() {
 
             <div className="space-y-8">
               <h2 className="text-3xl font-black tracking-tight text-white">
-                TOOLS
+                TOOLS WORKED WITH
               </h2>
               <div className="grid grid-cols-4 gap-6">
                 {SKILLS.map((skill, i) => (
                   <motion.div
                     key={i}
-                    whileHover={{ y: -5, scale: 1.1 }}
-                    className="aspect-square bg-white/[0.03] rounded-3xl border border-white/5 flex items-center justify-center p-4 group transition-colors hover:border-white/20"
+                    whileHover={{ y: -8, scale: 1.05 }}
+                    className="flex flex-col items-center justify-center gap-4 bg-white/[0.01] hover:bg-white/[0.04] rounded-3xl border border-white/5 hover:border-white/10 transition-all duration-300 p-6 group"
                   >
                     <img
                       src={skill.icon}
                       alt={skill.name}
-                      className="w-8 h-8 opacity-50 group-hover:opacity-100 transition-opacity grayscale group-hover:grayscale-0"
+                      className="w-10 h-10 opacity-30 group-hover:opacity-100 transition-all duration-300 grayscale group-hover:grayscale-0"
                     />
+                    <span className="text-[9px] font-black text-gray-500 uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center">
+                      {skill.name}
+                    </span>
                   </motion.div>
                 ))}
               </div>
@@ -278,7 +292,7 @@ export default function PortfolioPage() {
               <div className="w-12 h-1 bg-white/10 rounded-full" />
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-6 auto-rows-fr">
               {PROJECTS.map((project, i) => (
                 <motion.div
                   key={i}
@@ -286,29 +300,44 @@ export default function PortfolioPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="group relative aspect-[4/5] bg-white/[0.02] rounded-[2.5rem] overflow-hidden border border-white/5"
+                  className={`group relative ${project.isMasterpiece
+                    ? "md:col-span-3 aspect-[16/6]"
+                    : "aspect-[4/5]"
+                    } bg-white/[0.02] rounded-[2.5rem] overflow-hidden border border-white/5`}
                 >
                   <img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700 grayscale group-hover:grayscale-0"
                   />
-                  <div className="absolute inset-0 p-10 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+                  <div className="absolute inset-x-10 bottom-10 flex flex-col justify-end">
                     <h3 className="text-2xl font-black mb-2 text-white">
                       {project.title}
                     </h3>
-                    <p className="text-gray-400 text-sm mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed">
+                    <p className="text-white font-bold text-sm mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 leading-relaxed drop-shadow-lg">
                       {project.description}
                     </p>
-                    <div className="flex gap-2">
-                      {project.tech.map((t, j) => (
-                        <span
-                          key={j}
-                          className="text-[10px] font-bold text-gray-500 uppercase tracking-widest"
-                        >
-                          {t}
-                        </span>
-                      ))}
+                    <div className="flex justify-between items-end">
+                      <div className="flex gap-2">
+                        {project.tech.map((t, j) => (
+                          <span
+                            key={j}
+                            className="text-[10px] font-bold text-gray-500 uppercase tracking-widest"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                      <motion.a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="px-6 py-2 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center gap-2"
+                      >
+                        Visit <ExternalLink size={12} />
+                      </motion.a>
                     </div>
                   </div>
                 </motion.div>
@@ -326,21 +355,25 @@ export default function PortfolioPage() {
             <div className="flex gap-12">
               <motion.a
                 whileHover={{ y: -2 }}
-                href="#"
+                href="https://github.com/Gokulnath8887"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-500 hover:text-white transition-colors text-sm font-bold tracking-widest"
               >
                 GITHUB
               </motion.a>
               <motion.a
                 whileHover={{ y: -2 }}
-                href="#"
+                href="https://www.linkedin.com/in/gokul-nath-3825a22a1?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-500 hover:text-white transition-colors text-sm font-bold tracking-widest"
               >
                 LINKEDIN
               </motion.a>
               <motion.a
                 whileHover={{ y: -2 }}
-                href="#"
+                href="mailto:gokul9g0t@gmail.com"
                 className="text-gray-500 hover:text-white transition-colors text-sm font-bold tracking-widest"
               >
                 EMAIL
