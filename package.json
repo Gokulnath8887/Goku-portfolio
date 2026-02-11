@@ -2,7 +2,7 @@
     "name": "goku-portfolio",
     "private": true,
     "workspaces": [
-        "apps/*"
+        "apps/web"
     ],
     "scripts": {
         "build": "npm run build --workspace=web",
