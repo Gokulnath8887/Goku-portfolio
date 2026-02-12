@@ -1,0 +1,8 @@
+# Exclude mobile app from Vercel deployment
+apps/mobile
+node_modules
+.git
+.npmrc
+build_output.log
+build_output_ansi.log
+build.err
