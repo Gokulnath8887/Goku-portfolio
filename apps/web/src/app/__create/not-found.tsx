@@ -1,22 +1,32 @@
-import fg from 'fast-glob';
 import type { Route } from './+types/not-found';
 import { useNavigate } from 'react-router';
 import { useCallback, useEffect, useState } from 'react';
 
+// Use import.meta.glob to find all pages at build-time
+const pageModules = import.meta.glob('../**/page.{js,jsx,ts,tsx}');
+
+
 export async function loader({ params }: Route.LoaderArgs) {
-  const matches = await fg('src/**/page.{js,jsx,ts,tsx}');
+  const matches = Object.keys(pageModules);
   return {
     path: `/${params['*']}`,
     pages: matches
       .sort((a, b) => a.length - b.length)
       .map((match) => {
-        const url = match.replace('src/app', '').replace(/\/page\.(js|jsx|ts|tsx)$/, '') || '/';
+        // match is like '../blog/page.jsx'
+        // We want to transform it to a URL
+        const url = match
+          .replace(/^\.\.\//, '/') // Remove leading ../
+          .replace(/\/page\.(js|jsx|ts|tsx)$/, '') // Remove /page.xxx
+          || '/';
+
         const path = url.replaceAll('[', '').replaceAll(']', '');
         const displayPath = path === '/' ? 'Homepage' : path;
         return { url, path: displayPath };
       }),
   };
 }
+
 
 interface ParentSitemap {
   webPages?: Array<{
