@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
 import resumeImage from "./resume.png"; // Import the local image file
+import profileImageFile from "./profile.png"; // Import the local profile image
 import {
   Github,
   Linkedin,
@@ -115,7 +116,7 @@ const PROJECTS = [
 ];
 
 export default function PortfolioPage() {
-  const [profileImage, setProfileImage] = useState("/profile.png");
+  const [profileImage, setProfileImage] = useState(profileImageFile);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   const containerRef = useRef(null);
