@@ -116,7 +116,7 @@ const PROJECTS = [
 
 export default function PortfolioPage() {
   const [profileImage, setProfileImage] = useState(
-    "https://raw.createusercontent.com/054e67d1-98e6-4cd6-bdb7-49d7ea3f1d42/",
+    "https://raw.createusercontent.com/957e8790-2092-4fcf-b615-52dcf0ec828/",
   );
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
@@ -456,24 +456,6 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
 
-      <style jsx global>{`
-        ::-webkit-scrollbar {
-          width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-          background: #020202;
-        }
-        ::-webkit-scrollbar-thumb {
-          background: #111;
-          border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-          background: #222;
-        }
-        body {
-          background-color: #020202;
-        }
-      `}</style>
     </div>
   );
 }

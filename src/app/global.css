@@ -6,4 +6,21 @@
   input, textarea, select, button {
     @apply outline-none focus:outline-none;
   }
+  
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #020202;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #111;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #222;
+  }
+  body {
+    background-color: #020202;
+  }
 }
