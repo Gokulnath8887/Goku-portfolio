@@ -372,6 +372,32 @@ export default function PortfolioPage() {
           </div>
         </section>
 
+        {/* AI Automation Section (Under Construction) */}
+        <section className="py-24 px-6 md:px-8 border-t border-white/5">
+          <div className="max-w-7xl mx-auto flex flex-col items-center text-center space-y-8">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="space-y-4"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full">
+                <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full animate-pulse" />
+                <span className="text-[9px] font-black text-gray-400 uppercase tracking-[0.2em]">Under Construction</span>
+              </div>
+
+              <h2 className="text-2xl md:text-3xl font-black tracking-tighter text-white">
+                AI AUTOMATION IN N8N
+              </h2>
+
+              <p className="text-sm text-gray-500 max-w-lg mx-auto leading-relaxed font-medium">
+                Architecting intelligent, multi-agent workflows and modular automated
+                systems with n8n to revolutionize digital processes through advanced AI orchestration.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Minimal Footer */}
         <footer className="py-20 md:py-32 px-6 md:px-8 border-t border-white/5 bg-black/20 backdrop-blur-md">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16 md:gap-0">
@@ -387,7 +413,7 @@ export default function PortfolioPage() {
             <div className="flex flex-wrap justify-center gap-8 md:gap-16">
               {[
                 { label: 'GITHUB', href: 'https://github.com/Gokulnath8887' },
-                { label: 'LINKEDIN', href: 'https://www.linkedin.com/in/gokul-nath-3825a22a1' },
+                { label: 'LINKEDIN', href: 'https://www.linkedin.com/in/gokulnath-p-3825a22a1?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app' },
                 { label: 'EMAIL', href: 'mailto:gokul9g0t@gmail.com' }
               ].map((link) => (
                 <motion.a
