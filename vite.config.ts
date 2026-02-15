@@ -79,8 +79,5 @@ export default defineConfig({
     hmr: {
       overlay: false,
     },
-    warmup: {
-      clientFiles: ['./src/app/**/*', './src/app/root.tsx', './src/app/routes.ts'],
-    },
   },
 });
