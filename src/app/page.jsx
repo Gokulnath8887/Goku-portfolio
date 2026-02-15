@@ -115,9 +115,7 @@ const PROJECTS = [
 ];
 
 export default function PortfolioPage() {
-  const [profileImage, setProfileImage] = useState(
-    "https://raw.createusercontent.com/957e8790-2092-4fcf-b615-52dcf0ec828/",
-  );
+  const [profileImage, setProfileImage] = useState("/profile.png");
   const [isResumeOpen, setIsResumeOpen] = useState(false);
 
   const containerRef = useRef(null);
