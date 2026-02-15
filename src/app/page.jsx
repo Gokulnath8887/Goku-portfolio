@@ -173,12 +173,12 @@ export default function PortfolioPage() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border border-white/10 p-2"
+                className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border border-white/10 p-4 bg-white/5"
               >
                 <img
                   src={profileImage}
                   alt="Profile"
-                  className="w-full h-full object-cover rounded-full"
+                  className="w-full h-full object-cover rounded-full scale-95 group-hover:scale-100 transition-transform duration-700"
                 />
               </motion.div>
             </div>
