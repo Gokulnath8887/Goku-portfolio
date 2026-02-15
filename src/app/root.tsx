@@ -22,7 +22,7 @@ import {
 import './global.css';
 
 import { toPng } from 'html-to-image';
-import fetch from '@/__create/fetch';
+import fetch from '@/internal/fetch';
 // @ts-ignore
 import { SessionProvider } from '@auth/create/react';
 import { useNavigate } from 'react-router';
@@ -30,10 +30,10 @@ import { serializeError } from 'serialize-error';
 import { Toaster } from 'sonner';
 // @ts-ignore
 import { LoadFonts } from 'virtual:load-fonts.jsx';
-import { HotReloadIndicator } from '../__create/HotReload';
-import { useSandboxStore } from '../__create/hmr-sandbox-store';
+import { HotReloadIndicator } from '../internal/HotReload';
+import { useSandboxStore } from '../internal/hmr-sandbox-store';
 import type { Route } from './+types/root';
-import { useDevServerHeartbeat } from '../__create/useDevServerHeartbeat';
+import { useDevServerHeartbeat } from '../internal/useDevServerHeartbeat';
 
 export const links = () => [];
 
@@ -69,9 +69,8 @@ function SharedErrorBoundary({
 }): React.ReactElement {
   return (
     <div
-      className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500 ease-out ${
-        isOpen ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
-      }`}
+      className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-500 ease-out ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+        }`}
     >
       <div className="bg-[#18191B] text-[#F2F2F2] rounded-lg p-4 max-w-md w-full mx-4 shadow-lg">
         <div className="flex items-start gap-3">
@@ -462,8 +461,8 @@ export function Layout({ children }: { children: ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
-        <script type="module" src="/src/__create/dev-error-overlay.js"></script>
-        <link rel="icon" href="/src/__create/favicon.png" />
+        <script type="module" src="/src/internal/dev-error-overlay.js"></script>
+        <link rel="icon" href="/src/internal/favicon.png" />
         {LoadFontsSSR ? <LoadFontsSSR /> : null}
       </head>
       <body>

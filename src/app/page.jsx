@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
+import resumeImage from "./resume.png"; // Import the local image file
 import {
   Github,
   Linkedin,
@@ -90,24 +91,17 @@ const SKILLS = [
 
 const PROJECTS = [
   {
-    title: "Just Fly Broadband",
-    description: "A high-performance broadband network management system for local ISP services.",
-    tech: ["React", "Tailwind", "Vite"],
-    link: "https://justfly-eight.vercel.app",
-    image: "https://images.unsplash.com/photo-1544627836-822bfe450209?w=800&auto=format&fit=crop",
-  },
-  {
-    title: "Siddh Clinic",
-    description: "A comprehensive management system for clinical services and patient workflows.",
-    tech: ["Next.js", "PostgreSQL", "Tailwind"],
-    link: "https://siddha-royal-flow.vercel.app",
-    image: "https://images.unsplash.com/photo-1538108197017-c1b89c0ef319?w=800&auto=format&fit=crop",
+    title: "Chinnathirupathi Sky Yoga",
+    description: "A serene yoga and wellness center website offering holistic guidance and spiritual practices.",
+    tech: ["React", "Next.js", "Tailwind"],
+    link: "https://www.chinnathirupathiskyyoga.in",
+    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&auto=format&fit=crop",
   },
   {
     title: "Eppo Varum Bus Tracker",
     description: "Real-time transport tracking application for urban commuters.",
     tech: ["React Native", "Firebase", "Maps API"],
-    link: "https://eppo-varum.link",
+    link: "https://eppo-varum-bus-tracker.vercel.app",
     image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&auto=format&fit=crop",
   },
   {
@@ -264,15 +258,36 @@ export default function PortfolioPage() {
                 {SKILLS.map((skill, i) => (
                   <motion.div
                     key={i}
-                    whileHover={{ y: -8, scale: 1.05 }}
-                    className="flex flex-col items-center justify-center gap-4 bg-white/[0.01] hover:bg-white/[0.04] rounded-3xl border border-white/5 hover:border-white/10 transition-all duration-300 p-6 group"
+                    initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      delay: i * 0.05,
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 20
+                    }}
+                    whileHover={{
+                      y: -12,
+                      scale: 1.1,
+                      rotate: [0, -3, 3, 0],
+                      transition: {
+                        duration: 0.3,
+                        rotate: {
+                          repeat: Infinity,
+                          duration: 0.5
+                        }
+                      }
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex flex-col items-center justify-center gap-4 bg-white/[0.01] hover:bg-white/[0.08] rounded-3xl border border-white/5 hover:border-white/20 transition-all duration-300 p-6 group hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] cursor-pointer"
                   >
                     <img
                       src={skill.icon}
                       alt={skill.name}
-                      className="w-10 h-10 opacity-30 group-hover:opacity-100 transition-all duration-300 grayscale group-hover:grayscale-0"
+                      className="w-10 h-10 opacity-30 group-hover:opacity-100 transition-all duration-300 grayscale group-hover:grayscale-0 drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
                     />
-                    <span className="text-[9px] font-black text-gray-500 uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-center">
+                    <span className="text-[9px] font-black text-gray-500 group-hover:text-white uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all duration-300 text-center">
                       {skill.name}
                     </span>
                   </motion.div>
@@ -292,7 +307,7 @@ export default function PortfolioPage() {
               <div className="w-12 h-1 bg-white/10 rounded-full" />
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 auto-rows-fr">
+            <div className="grid md:grid-cols-2 gap-6 auto-rows-fr">
               {PROJECTS.map((project, i) => (
                 <motion.div
                   key={i}
@@ -302,7 +317,7 @@ export default function PortfolioPage() {
                   transition={{ delay: i * 0.1 }}
                   className={`group relative ${project.isMasterpiece
                     ? "md:col-span-3 aspect-[16/6]"
-                    : "aspect-[4/5]"
+                    : "aspect-[3/2]"
                     } bg-white/[0.02] rounded-[2.5rem] overflow-hidden border border-white/5`}
                 >
                   <img
@@ -397,47 +412,43 @@ export default function PortfolioPage() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-[#0a0a0a] w-full max-w-xl rounded-[3rem] p-16 relative border border-white/10"
+              className="bg-[#0a0a0a] w-full max-w-4xl rounded-[2rem] p-8 relative border border-white/10 max-h-[90vh] overflow-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="space-y-12">
-                <div className="space-y-4">
-                  <h2 className="text-4xl font-black tracking-tighter text-white">
+              <div className="space-y-6">
+                <div className="flex justify-between items-center">
+                  <h2 className="text-2xl font-black tracking-tighter text-white">
                     RESUME
                   </h2>
-                  <p className="text-gray-500 text-sm leading-relaxed">
-                    B.Tech IT student specializing in modern frontend frameworks
-                    and scalable backend services.
-                  </p>
+                  <button
+                    onClick={() => setIsResumeOpen(false)}
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
                 </div>
 
-                <div className="space-y-8">
-                  <div className="space-y-2">
-                    <h4 className="text-xs font-black text-gray-400 tracking-[0.3em] uppercase">
-                      Core Stack
-                    </h4>
-                    <p className="text-white text-lg font-bold">
-                      React, Angular, Next.js, Node.js
-                    </p>
-                  </div>
-                  <div className="space-y-2">
-                    <h4 className="text-xs font-black text-gray-400 tracking-[0.3em] uppercase">
-                      Status
-                    </h4>
-                    <p className="text-white text-lg font-bold">
-                      Available for freelance projects
-                    </p>
-                  </div>
+                <div className="bg-white rounded-xl overflow-hidden">
+                  <img
+                    src={resumeImage}
+                    alt="P. Gokulnath Resume"
+                    className="w-full h-auto"
+                  />
                 </div>
 
                 <button
                   onClick={() => {
+                    const link = document.createElement('a');
+                    link.href = resumeImage;
+                    link.download = "Gokulnath_Resume.png";
+                    link.click();
                     toast.success("Download started");
-                    setIsResumeOpen(false);
                   }}
-                  className="w-full py-5 bg-white text-black font-black rounded-full hover:bg-gray-200 transition-colors text-sm uppercase tracking-widest"
+                  className="w-full py-4 bg-white text-black font-black rounded-full hover:bg-gray-200 transition-colors text-sm uppercase tracking-widest"
                 >
-                  Download PDF
+                  Download Resume
                 </button>
               </div>
             </motion.div>
