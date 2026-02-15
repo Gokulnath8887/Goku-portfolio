@@ -107,7 +107,7 @@ const PROJECTS = [
     title: "Eppo Varum Bus Tracker",
     description: "Real-time transport tracking application for urban commuters.",
     tech: ["React Native", "Firebase", "Maps API"],
-    link: "https://eppo-varum-bus-tracker.vercel.app",
+    link: "https://eppo-varum.link",
     image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&auto=format&fit=crop",
   },
   {
