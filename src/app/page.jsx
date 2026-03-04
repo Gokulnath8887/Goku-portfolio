@@ -138,7 +138,7 @@ export default function PortfolioPage() {
   return (
     <div
       ref={containerRef}
-      className="min-h-screen bg-[#020202] text-white selection:bg-white/20 overflow-x-hidden font-sans"
+      className="min-h-screen bg-background text-foreground selection:bg-foreground/20 overflow-x-hidden font-sans transition-colors duration-300"
     >
       <Toaster position="top-center" richColors />
 
@@ -150,12 +150,11 @@ export default function PortfolioPage() {
         <LogoCloud logos={TECH_LOGOS} className="pointer-events-auto" />
       </motion.div>
 
-      {/* Minimal Navigation */}
       <motion.nav
         style={{ opacity }}
         className="fixed top-0 w-full z-50 px-4 md:px-8 py-6 flex justify-between items-center pointer-events-none"
       >
-        <div className="flex gap-4 items-center bg-black/40 backdrop-blur-2xl px-4 py-3 rounded-full border border-white/10 pointer-events-auto">
+        <div className="flex gap-4 items-center bg-card/40 backdrop-blur-2xl px-4 py-3 rounded-full border border-border pointer-events-auto">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -167,12 +166,12 @@ export default function PortfolioPage() {
           </motion.button>
         </div>
 
-        <div className="flex gap-4 md:gap-8 items-center bg-black/40 backdrop-blur-2xl px-4 md:px-6 py-3 rounded-full border border-white/10 pointer-events-auto">
+        <div className="flex gap-4 md:gap-8 items-center bg-card/40 backdrop-blur-2xl px-4 md:px-6 py-3 rounded-full border border-border pointer-events-auto">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsResumeOpen(true)}
-            className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2 text-gray-400 hover:text-white transition-all"
+            className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2 text-muted-foreground hover:text-foreground transition-all"
           >
             <FileText size={14} />
             Resume
@@ -197,11 +196,11 @@ export default function PortfolioPage() {
         <section className="py-20 md:py-40 px-6 md:px-8">
           <div className="max-w-7xl mx-auto space-y-16 md:space-y-24">
             <div className="flex flex-col items-center text-center space-y-6">
-              <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white uppercase text-center">
+              <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground uppercase text-center">
                 PROJECTS LIVE PRODUCTION
               </h2>
-              <div className="w-16 h-1.5 bg-gradient-to-r from-white/20 via-white/5 to-white/20 rounded-full" />
-              <p className="text-gray-500 font-medium text-sm md:text-base max-w-lg">
+              <div className="w-16 h-1.5 bg-gradient-to-r from-border/50 via-border/10 to-border/50 rounded-full" />
+              <p className="text-muted-foreground font-medium text-sm md:text-base max-w-lg">
                 Hover to explore my work. Click any card to view details.
               </p>
             </div>
@@ -227,7 +226,7 @@ export default function PortfolioPage() {
         </section>
 
         {/* AI Automation Section (Under Construction) */}
-        <section className="py-24 px-6 md:px-8 border-t border-white/5">
+        <section className="py-24 px-6 md:px-8 border-t border-border">
           <div className="max-w-7xl mx-auto flex flex-col items-center text-center space-y-8">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -235,16 +234,16 @@ export default function PortfolioPage() {
               viewport={{ once: true }}
               className="space-y-4"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-muted border border-border rounded-full">
                 <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full animate-pulse" />
-                <span className="text-[9px] font-black text-gray-400 uppercase tracking-[0.2em]">Under Construction</span>
+                <span className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.2em]">Under Construction</span>
               </div>
 
-              <h2 className="text-2xl md:text-3xl font-black tracking-tighter text-white">
+              <h2 className="text-2xl md:text-3xl font-black tracking-tighter text-foreground">
                 AI AUTOMATION IN N8N
               </h2>
 
-              <p className="text-sm text-gray-500 max-w-lg mx-auto leading-relaxed font-medium">
+              <p className="text-sm text-muted-foreground max-w-lg mx-auto leading-relaxed font-medium">
                 Architecting intelligent, multi-agent workflows and modular automated
                 systems with n8n to revolutionize digital processes through advanced AI orchestration.
               </p>
@@ -253,13 +252,13 @@ export default function PortfolioPage() {
         </section>
 
         {/* Minimal Footer */}
-        <footer className="py-20 md:py-32 px-6 md:px-8 border-t border-white/5 bg-black/20 backdrop-blur-md">
+        <footer className="py-20 md:py-32 px-6 md:px-8 border-t border-border bg-card/40 backdrop-blur-md">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16 md:gap-0">
             <div className="text-center md:text-left space-y-4">
-              <div className="text-xl md:text-2xl font-black tracking-tighter text-white">
-                GOKULNATH<span className="text-gray-500">.</span>
+              <div className="text-xl md:text-2xl font-black tracking-tighter text-foreground">
+                GOKULNATH<span className="text-muted-foreground">.</span>
               </div>
-              <div className="text-[10px] md:text-xs text-gray-600 font-extrabold tracking-[0.3em] uppercase">
+              <div className="text-[10px] md:text-xs text-muted-foreground/60 font-extrabold tracking-[0.3em] uppercase">
                 © 2026 / Software Engineer & Designer
               </div>
             </div>
@@ -272,11 +271,11 @@ export default function PortfolioPage() {
               ].map((link) => (
                 <motion.a
                   key={link.label}
-                  whileHover={{ y: -4, color: '#fff' }}
+                  whileHover={{ y: -4, color: 'hsl(var(--foreground))' }}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-500 transition-all text-xs font-black tracking-[0.2em]"
+                  className="text-muted-foreground transition-all text-xs font-black tracking-[0.2em]"
                 >
                   {link.label}
                 </motion.a>
@@ -293,28 +292,28 @@ export default function PortfolioPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10 bg-black/95 backdrop-blur-3xl"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10 bg-background/95 backdrop-blur-3xl"
             onClick={() => setIsResumeOpen(false)}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="bg-[#0a0a0a] w-full max-w-5xl rounded-[2.5rem] md:rounded-[3.5rem] p-6 md:p-12 relative border border-white/10 max-h-[90vh] flex flex-col gap-8 md:gap-10"
+              className="bg-card w-full max-w-5xl rounded-[2.5rem] md:rounded-[3.5rem] p-6 md:p-12 relative border border-border max-h-[90vh] flex flex-col gap-8 md:gap-10"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center px-2">
                 <div className="space-y-1">
-                  <h2 className="text-2xl md:text-4xl font-black tracking-tighter text-white">
+                  <h2 className="text-2xl md:text-4xl font-black tracking-tighter text-foreground">
                     CURRICULUM VITAE
                   </h2>
-                  <p className="text-gray-500 font-bold text-[10px] md:text-xs uppercase tracking-[0.2em]">P. Gokulnath / Resume</p>
+                  <p className="text-muted-foreground font-bold text-[10px] md:text-xs uppercase tracking-[0.2em]">P. Gokulnath / Resume</p>
                 </div>
                 <motion.button
                   whileHover={{ scale: 1.1, rotate: 90 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => setIsResumeOpen(false)}
-                  className="w-10 h-10 md:w-14 md:h-14 bg-white/5 rounded-full flex items-center justify-center text-gray-400 hover:text-white border border-white/10 transition-all"
+                  className="w-10 h-10 md:w-14 md:h-14 bg-muted rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground border border-border transition-all"
                 >
                   <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />

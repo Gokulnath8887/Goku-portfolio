@@ -14,12 +14,12 @@ type LogoCloudProps = React.ComponentProps<"div"> & {
 
 export function LogoCloud({ logos, className, ...props }: LogoCloudProps) {
     return (
-        <div className={`relative w-full py-4 bg-[#020202] ${className}`} {...props}>
+        <div className={`relative w-full py-4 bg-background border-b border-border transition-colors duration-300 ${className}`} {...props}>
             <InfiniteSlider gap={60} reverse speed={60} speedOnHover={20}>
                 {logos.map((logo) => (
                     <img
                         alt={logo.alt}
-                        className="pointer-events-none h-6 select-none md:h-8 brightness-0 invert opacity-40 hover:opacity-100 transition-opacity duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.1)]"
+                        className="pointer-events-none h-6 select-none md:h-8 opacity-40 hover:opacity-100 transition-opacity duration-300 grayscale dark:brightness-0 dark:invert"
                         height="auto"
                         key={`logo-${logo.alt}`}
                         loading="lazy"
