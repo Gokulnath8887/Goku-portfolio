@@ -2,25 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── shadcn-compatible design tokens for Light mode ─────────────── */
+:root {
+  --background: 0 0% 98%;
+  --foreground: 0 0% 9%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 9%;
+  --muted: 0 0% 96%;
+  --muted-foreground: 0 0% 45%;
+  --border: 0 0% 88%;
+  --accent: 0 0% 90%;
+  --accent-foreground: 0 0% 9%;
+  --secondary: 0 0% 96%;
+  --secondary-foreground: 0 0% 9%;
+  --folder-back: #e5e7eb;
+  --folder-front: #ffffff;
+  --folder-tab: #d1d5db;
+}
+
+/* Dark mode tokens (applied when dark class is active) */
+.dark,
+[data-theme="dark"] {
+  --background: 0 0% 1%;
+  --foreground: 0 0% 93%;
+  --card: 0 0% 6%;
+  --card-foreground: 0 0% 93%;
+  --muted: 0 0% 12%;
+  --muted-foreground: 0 0% 55%;
+  --border: 0 0% 15%;
+  --accent: 0 0% 40%;
+  --accent-foreground: 0 0% 95%;
+  --secondary: 0 0% 6%;
+  --secondary-foreground: 0 0% 90%;
+  --folder-back: #2a2a2a;
+  --folder-front: #333333;
+  --folder-tab: #222222;
+}
+
 @layer base {
-  input, textarea, select, button {
+
+  input,
+  textarea,
+  select,
+  button {
     @apply outline-none focus:outline-none;
   }
-  
+
   ::-webkit-scrollbar {
     width: 6px;
   }
+
   ::-webkit-scrollbar-track {
-    background: #020202;
+    background: transparent;
   }
+
   ::-webkit-scrollbar-thumb {
-    background: #111;
-    border-radius: 10px;
+    @apply bg-gray-300 dark:bg-[#111] rounded-full;
   }
+
   ::-webkit-scrollbar-thumb:hover {
-    background: #222;
+    @apply bg-gray-400 dark:bg-[#222];
   }
+
   body {
-    background-color: #020202;
+    @apply bg-white dark:bg-[#020202] text-black dark:text-white transition-colors duration-300;
   }
 }
