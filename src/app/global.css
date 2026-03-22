@@ -1,42 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Outfit:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Primary bg: #008080 (Teal)  |  Accent: #F4E1C1 (Warm Sand) */
 
-/* ─── shadcn-compatible design tokens for Light mode ─────────────── */
 :root {
-  --background: 0 0% 98%;
-  --foreground: 0 0% 9%;
-  --card: 0 0% 100%;
-  --card-foreground: 0 0% 9%;
-  --muted: 0 0% 96%;
-  --muted-foreground: 0 0% 45%;
-  --border: 0 0% 88%;
-  --accent: 0 0% 90%;
-  --accent-foreground: 0 0% 9%;
-  --secondary: 0 0% 96%;
-  --secondary-foreground: 0 0% 9%;
-  --folder-back: #e5e7eb;
-  --folder-front: #ffffff;
-  --folder-tab: #d1d5db;
+  /* Light mode → soft sandy warm tones */
+  --background: 42 80% 97%;
+  --foreground: 180 100% 20%;
+  --card: 42 50% 100%;
+  --card-foreground: 180 100% 20%;
+  --muted: 42 40% 93%;
+  --muted-foreground: 180 30% 45%;
+  --border: 180 25% 82%;
+  --accent: 180 100% 25%;           /* Teal */
+  --accent-foreground: 0 0% 100%;
+  --secondary: 42 40% 95%;
+  --secondary-foreground: 180 100% 20%;
+  --folder-back: #d4e8e8;
+  --folder-front: #eaf4f4;
+  --folder-tab: #a0cccc;
 }
 
-/* Dark mode tokens (applied when dark class is active) */
+/* Dark mode → Teal palette */
 .dark,
 [data-theme="dark"] {
-  --background: 0 0% 1%;
-  --foreground: 0 0% 93%;
-  --card: 0 0% 6%;
-  --card-foreground: 0 0% 93%;
-  --muted: 0 0% 12%;
-  --muted-foreground: 0 0% 55%;
-  --border: 0 0% 15%;
-  --accent: 0 0% 40%;
-  --accent-foreground: 0 0% 95%;
-  --secondary: 0 0% 6%;
-  --secondary-foreground: 0 0% 90%;
-  --folder-back: #2a2a2a;
-  --folder-front: #333333;
-  --folder-tab: #222222;
+  --background: 180 100% 25%;       /* #008080 Teal */
+  --foreground: 38 70% 86%;         /* #F4E1C1 Warm Sand */
+  --card: 180 80% 18%;
+  --card-foreground: 38 70% 86%;
+  --muted: 180 60% 20%;
+  --muted-foreground: 180 20% 60%;
+  --border: 180 50% 28%;
+  --accent: 38 70% 86%;             /* Warm Sand highlight */
+  --accent-foreground: 180 100% 10%;
+  --secondary: 180 65% 20%;
+  --secondary-foreground: 38 70% 86%;
+  --folder-back: #003a3a;
+  --folder-front: #004d4d;
+  --folder-tab: #002828;
 }
 
 @layer base {
@@ -57,14 +60,49 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 dark:bg-[#111] rounded-full;
+    background: #002828;
+    border-radius: 9999px;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: #f4e1c140;
+    border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-400 dark:bg-[#222];
+    background: #003a3a;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #f4e1c170;
   }
 
   body {
-    @apply bg-white dark:bg-[#020202] text-black dark:text-white transition-colors duration-300;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300; /* Defaulting to light as requested */
+    background-color: #faf7f0;
+    color: #004040;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .dark body,
+  body.dark {
+    background-color: #008080;
+    color: #F4E1C1;
+  }
+
+  /* Ensure html.dark propagates correctly */
+  html.dark {
+    background-color: #008080;
+    color: #F4E1C1;
+  }
+}
+
+@layer utilities {
+  .font-black,
+  .font-bold {
+    font-family: 'Luckiest Guy', cursive, sans-serif !important;
+    font-weight: 400 !important;
+    text-transform: uppercase;
   }
 }

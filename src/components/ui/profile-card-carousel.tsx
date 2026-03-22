@@ -51,7 +51,7 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
             {/* Desktop layout */}
             <div className='hidden md:flex relative items-center justify-center pt-8'>
                 {/* Avatar */}
-                <div className='w-[470px] h-[470px] rounded-[3rem] overflow-hidden bg-gray-100 dark:bg-[#111] flex-shrink-0 border border-black/5 dark:border-white/5 relative'>
+                <div className='w-[470px] h-[470px] rounded-[3rem] overflow-hidden bg-[#d4e8e8] dark:bg-[#003838] flex-shrink-0 border border-[#4aabab]/30 dark:border-[#f4e1c1]/10 relative'>
                     <AnimatePresence mode='wait'>
                         <motion.div
                             key={currentSlide.imageUrl}
@@ -72,7 +72,7 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                 </div>
 
                 {/* Card */}
-                <div className='bg-white/80 dark:bg-white/[0.02] backdrop-blur-3xl border border-black/10 dark:border-white/10 rounded-[3rem] shadow-2xl dark:shadow-[0_0_80px_rgba(0,0,0,0.8)] p-12 ml-[-120px] z-10 max-w-xl flex-1'>
+                <div className='bg-[#eaf4f4]/90 dark:bg-[#003838]/90 backdrop-blur-3xl border border-[#4aabab]/40 dark:border-[#f4e1c1]/15 rounded-[3rem] shadow-2xl dark:shadow-[0_0_80px_rgba(0,0,0,0.9)] p-12 ml-[-120px] z-10 max-w-xl flex-1'>
                     <AnimatePresence mode='wait'>
                         <motion.div
                             key={currentSlide.name + currentSlide.title}
@@ -82,16 +82,16 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                         >
                             <div className='mb-8'>
-                                <h2 className='text-3xl font-black text-black dark:text-white mb-2 tracking-tight'>
+                                <h2 className='text-3xl font-black text-[#003838] dark:text-[#F4E1C1] mb-2 tracking-tight'>
                                     {currentSlide.name}
                                 </h2>
 
-                                <p className='text-sm font-bold tracking-widest uppercase text-gray-500'>
+                                <p className='text-sm font-bold tracking-widest uppercase text-[#006666] dark:text-[#f4e1c180]'>
                                     {currentSlide.title}
                                 </p>
                             </div>
 
-                            <p className='text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-10 font-medium'>
+                            <p className='text-[#004040] dark:text-[#f4e1c1cc] text-lg leading-relaxed mb-10 font-medium'>
                                 {currentSlide.description}
                             </p>
 
@@ -102,10 +102,10 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                                         href={url}
                                         target='_blank'
                                         rel='noopener noreferrer'
-                                        className='w-12 h-12 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-full flex items-center justify-center transition-all duration-300 hover:bg-black dark:hover:bg-white hover:border-black dark:hover:border-white hover:scale-110 group cursor-pointer'
+                                        className='w-12 h-12 bg-[#008080]/5 dark:bg-[#f4e1c1]/8 border border-[#006666]/20 dark:border-[#f4e1c1]/20 rounded-full flex items-center justify-center transition-all duration-300 hover:bg-[#008080] dark:hover:bg-[#F4E1C1] hover:border-[#008080] dark:hover:border-[#F4E1C1] hover:scale-110 group cursor-pointer'
                                         aria-label={label}
                                     >
-                                        <IconComponent className='w-5 h-5 text-black dark:text-white group-hover:text-white dark:group-hover:text-black transition-colors' />
+                                        <IconComponent className='w-5 h-5 text-[#003838] dark:text-[#F4E1C1] group-hover:text-white dark:group-hover:text-[#008080] transition-colors' />
                                     </a>
                                 ))}
                             </div>
@@ -117,7 +117,7 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
             {/* Mobile layout */}
             <div className='md:hidden max-w-sm mx-auto text-center'>
                 {/* Avatar */}
-                <div className='w-full aspect-square bg-gray-100 dark:bg-[#111] rounded-[2.5rem] overflow-hidden mb-8 border border-black/5 dark:border-white/5'>
+                <div className='w-full aspect-square bg-[#d4e8e8] dark:bg-[#003838] rounded-[2.5rem] overflow-hidden mb-8 border border-[#4aabab]/30 dark:border-[#f4e1c1]/10'>
                     <AnimatePresence mode='wait'>
                         <motion.div
                             key={currentSlide.imageUrl}
@@ -138,7 +138,7 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                 </div>
 
                 {/* Card content */}
-                <div className='px-4 bg-white/[0.02] backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-8 -mt-20 relative z-10'>
+                <div className='px-4 bg-[#003838]/95 dark:bg-[#003838]/95 backdrop-blur-2xl border border-[#f4e1c1]/15 rounded-[2.5rem] p-8 -mt-20 relative z-10'>
                     <AnimatePresence mode='wait'>
                         <motion.div
                             key={currentSlide.name + currentSlide.title}
@@ -147,15 +147,15 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                         >
-                            <h2 className='text-2xl font-black text-white mb-2 tracking-tight'>
+                            <h2 className='text-2xl font-black text-[#F4E1C1] mb-2 tracking-tight'>
                                 {currentSlide.name}
                             </h2>
 
-                            <p className='text-[10px] font-bold tracking-widest uppercase text-gray-500 mb-6'>
+                            <p className='text-[10px] font-bold tracking-widest uppercase text-[#f4e1c170] mb-6'>
                                 {currentSlide.title}
                             </p>
 
-                            <p className='text-gray-300 text-sm leading-relaxed mb-8 font-medium'>
+                            <p className='text-[#f4e1c1cc] text-sm leading-relaxed mb-8 font-medium'>
                                 {currentSlide.description}
                             </p>
 
@@ -166,10 +166,10 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                                         href={url}
                                         target='_blank'
                                         rel='noopener noreferrer'
-                                        className='w-12 h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center transition-all duration-300 hover:bg-white hover:border-white cursor-pointer group'
+                                        className='w-12 h-12 bg-[#f4e1c1]/8 border border-[#f4e1c1]/20 rounded-full flex items-center justify-center transition-all duration-300 hover:bg-[#F4E1C1] hover:border-[#F4E1C1] cursor-pointer group'
                                         aria-label={label}
                                     >
-                                        <IconComponent className='w-5 h-5 text-white group-hover:text-black transition-colors' />
+                                        <IconComponent className='w-5 h-5 text-[#F4E1C1] group-hover:text-[#008080] transition-colors' />
                                     </a>
                                 ))}
                             </div>
@@ -183,7 +183,7 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                 <button
                     onClick={handlePrevious}
                     aria-label='Previous'
-                    className='w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer text-white'
+                    className='w-12 h-12 rounded-full bg-[#f4e1c1]/8 border border-[#f4e1c1]/20 flex items-center justify-center hover:bg-[#f4e1c1]/20 transition-colors cursor-pointer text-[#F4E1C1] dark:text-[#F4E1C1]'
                 >
                     <ChevronLeft className='w-6 h-6' />
                 </button>
@@ -196,8 +196,8 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                             className={cn(
                                 "w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer",
                                 idx === currentIndex
-                                    ? "bg-white scale-125"
-                                    : "bg-white/20 hover:bg-white/40"
+                                    ? "bg-[#F4E1C1] scale-125"
+                                    : "bg-[#f4e1c1]/25 hover:bg-[#f4e1c1]/50"
                             )}
                             aria-label={`Go to slide ${idx + 1}`}
                         />
@@ -207,7 +207,7 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                 <button
                     onClick={handleNext}
                     aria-label='Next'
-                    className='w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors cursor-pointer text-white'
+                    className='w-12 h-12 rounded-full bg-[#f4e1c1]/8 border border-[#f4e1c1]/20 flex items-center justify-center hover:bg-[#f4e1c1]/20 transition-colors cursor-pointer text-[#F4E1C1] dark:text-[#F4E1C1]'
                 >
                     <ChevronRight className='w-6 h-6' />
                 </button>

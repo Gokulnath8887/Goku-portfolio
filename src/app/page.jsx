@@ -159,7 +159,7 @@ export default function PortfolioPage() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={toggleTheme}
-            className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition-all bg-white/5 border border-white/10"
+            className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-[#006666] dark:text-[#f4e1c180] hover:text-[#003838] dark:hover:text-[#F4E1C1] transition-all bg-[#008080]/5 dark:bg-[#f4e1c1]/8 border border-[#4aabab]/30 dark:border-[#f4e1c1]/20"
             aria-label="Toggle theme"
           >
             {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
@@ -199,7 +199,7 @@ export default function PortfolioPage() {
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground uppercase text-center">
                 PROJECTS LIVE PRODUCTION
               </h2>
-              <div className="w-16 h-1.5 bg-gradient-to-r from-border/50 via-border/10 to-border/50 rounded-full" />
+              <div className="w-16 h-1.5 bg-gradient-to-r from-[#f4e1c1]/40 via-[#f4e1c1]/10 to-[#f4e1c1]/40 rounded-full" />
               <p className="text-muted-foreground font-medium text-sm md:text-base max-w-lg">
                 Hover to explore my work. Click any card to view details.
               </p>
@@ -234,8 +234,8 @@ export default function PortfolioPage() {
               viewport={{ once: true }}
               className="space-y-4"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-muted border border-border rounded-full">
-                <div className="w-1.5 h-1.5 bg-yellow-500 rounded-full animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#003838] dark:bg-[#003838] border border-[#f4e1c1]/20 rounded-full">
+                <div className="w-1.5 h-1.5 bg-[#F4E1C1] rounded-full animate-pulse" />
                 <span className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.2em]">Under Construction</span>
               </div>
 
@@ -339,7 +339,7 @@ export default function PortfolioPage() {
                   link.click();
                   toast.success("Resume download started");
                 }}
-                className="w-full py-5 md:py-6 bg-white text-black font-black rounded-3xl md:rounded-[2rem] hover:bg-gray-100 transition-colors text-[10px] md:text-xs uppercase tracking-[0.3em] flex items-center justify-center gap-3 shadow-xl"
+                className="w-full py-5 md:py-6 bg-[#F4E1C1] text-[#008080] font-black rounded-3xl md:rounded-[2rem] hover:bg-[#faf7f0] transition-colors text-[10px] md:text-xs uppercase tracking-[0.3em] flex items-center justify-center gap-3 shadow-xl"
               >
                 <FileText size={16} />
                 Download PDF Portfolio
