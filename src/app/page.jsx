@@ -13,12 +13,17 @@ import {
   ChevronRight,
   Sparkles,
   Sun,
-  Moon
+  Moon,
+  Calendar,
+  Code,
+  User,
+  Clock
 } from "lucide-react";
 import { Toaster, toast } from "sonner";
-import { AnimatedFolder } from "@/components/ui/3d-folder";
 import { LogoCloud } from "@/components/ui/logo-cloud-4";
 import { ProfileCarousel } from "@/components/ui/profile-card-carousel";
+import { ProjectShowcase } from "@/components/ui/project-showcase";
+import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline";
 
 const TECH_LOGOS = [
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original-wordmark.svg", alt: "React" },
@@ -39,30 +44,7 @@ const TECH_LOGOS = [
   { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original-wordmark.svg", alt: "Three.js" },
 ];
 
-const PROJECTS = [
-  {
-    title: "Chinnathirupathi Sky Yoga",
-    description: "A serene yoga and wellness center website offering holistic guidance and spiritual practices.",
-    tech: ["React", "Next.js", "Tailwind"],
-    link: "https://www.chinnathirupathiskyyoga.in",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&auto=format&fit=crop",
-  },
-  {
-    title: "Eppo Varum Bus Tracker",
-    description: "Real-time transport tracking application for urban commuters.",
-    tech: ["React Native", "Firebase", "Maps API"],
-    link: "https://eppo-varum-bus-tracker.vercel.app",
-    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&auto=format&fit=crop",
-  },
-  {
-    title: "Dazzle Deals",
-    description: "Integrated with database and with admin panel to manage images of the website and manage customer query orders.",
-    tech: ["Next.js", "Supabase", "Stripe"],
-    link: "https://dazzle-deals.vercel.app",
-    image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1200&auto=format&fit=crop",
-    isMasterpiece: true,
-  },
-];
+
 
 const PROFILE_SLIDES = [
   {
@@ -92,6 +74,64 @@ const PROFILE_SLIDES = [
     mailUrl: "mailto:gokul9g0t@gmail.com",
     linkedinUrl: "https://www.linkedin.com/in/gokulnath-g-n/",
   }
+];
+
+const TIMELINE_DATA = [
+  {
+    id: 1,
+    title: "Planning",
+    date: "Jan 2024",
+    content: "Project planning and requirements gathering phase.",
+    category: "Planning",
+    icon: Calendar,
+    relatedIds: [2],
+    status: "completed",
+    energy: 100,
+  },
+  {
+    id: 2,
+    title: "Design",
+    date: "Feb 2024",
+    content: "UI/UX design and system architecture.",
+    category: "Design",
+    icon: FileText,
+    relatedIds: [1, 3],
+    status: "completed",
+    energy: 90,
+  },
+  {
+    id: 3,
+    title: "Development",
+    date: "Mar 2024",
+    content: "Core features implementation and testing.",
+    category: "Development",
+    icon: Code,
+    relatedIds: [2, 4],
+    status: "in-progress",
+    energy: 60,
+  },
+  {
+    id: 4,
+    title: "Testing",
+    date: "Apr 2024",
+    content: "User testing and bug fixes.",
+    category: "Testing",
+    icon: User,
+    relatedIds: [3, 5],
+    status: "pending",
+    energy: 30,
+  },
+  {
+    id: 5,
+    title: "Release",
+    date: "May 2024",
+    content: "Final deployment and release.",
+    category: "Release",
+    icon: Clock,
+    relatedIds: [4],
+    status: "pending",
+    energy: 10,
+  },
 ];
 
 export default function PortfolioPage() {
@@ -145,16 +185,16 @@ export default function PortfolioPage() {
       {/* Sticky Top Tech Stack Bar */}
       <motion.div
         style={{ y: topBarY, opacity: topBarOpacity }}
-        className="fixed top-0 left-0 w-full z-40 pointer-events-none"
+        className="fixed top-0 left-0 w-full z-40 pointer-events-none transform-gpu will-change-transform"
       >
         <LogoCloud logos={TECH_LOGOS} className="pointer-events-auto" />
       </motion.div>
 
       <motion.nav
         style={{ opacity }}
-        className="fixed top-0 w-full z-50 px-4 md:px-8 py-6 flex justify-between items-center pointer-events-none"
+        className="fixed top-0 w-full z-50 px-4 md:px-8 py-6 flex justify-between items-center pointer-events-none transform-gpu will-change-[opacity]"
       >
-        <div className="flex gap-4 items-center bg-card/40 backdrop-blur-2xl px-4 py-3 rounded-full border border-border pointer-events-auto">
+        <div className="flex gap-4 items-center bg-card/40 backdrop-blur-md md:backdrop-blur-2xl px-4 py-3 rounded-full border border-border pointer-events-auto">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -166,7 +206,7 @@ export default function PortfolioPage() {
           </motion.button>
         </div>
 
-        <div className="flex gap-4 md:gap-8 items-center bg-card/40 backdrop-blur-2xl px-4 md:px-6 py-3 rounded-full border border-border pointer-events-auto">
+        <div className="flex gap-4 md:gap-8 items-center bg-card/40 backdrop-blur-md md:backdrop-blur-2xl px-4 md:px-6 py-3 rounded-full border border-border pointer-events-auto">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -181,46 +221,54 @@ export default function PortfolioPage() {
 
       <main className="relative z-10">
         {/* Centered Hero Section */}
-        <section className="min-h-screen flex flex-col items-center justify-center px-4 md:px-6 py-20">
+        <section className="relative min-h-screen flex flex-col items-center justify-center px-4 md:px-6 py-20 overflow-hidden">
+          
+          {/* Timeline background mounted behind the carousel synced with scroll animations */}
+          <motion.div 
+            style={{ y: y1, opacity, scale }}
+            className="absolute inset-0 w-full h-full transform-gpu will-change-transform"
+          >
+            <RadialOrbitalTimeline timelineData={TIMELINE_DATA} />
+          </motion.div>
+
           <motion.div
             style={{ y: y1, opacity, scale }}
-            className="w-full"
+            className="w-full transform-gpu will-change-transform z-10 pointer-events-none"
           >
-            <ProfileCarousel slides={PROFILE_SLIDES} />
+            <div className="pointer-events-auto">
+              <ProfileCarousel slides={PROFILE_SLIDES} />
+            </div>
           </motion.div>
         </section>
 
 
 
-        {/* Projects — Single Folder */}
+        {/* Projects — List Showcase */}
         <section className="py-20 md:py-40 px-6 md:px-8">
-          <div className="max-w-7xl mx-auto space-y-16 md:space-y-24">
-            <div className="flex flex-col items-center text-center space-y-6">
-              <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground uppercase text-center">
-                PROJECTS LIVE PRODUCTION
-              </h2>
-              <div className="w-16 h-1.5 bg-gradient-to-r from-[#f4e1c1]/40 via-[#f4e1c1]/10 to-[#f4e1c1]/40 rounded-full" />
-              <p className="text-muted-foreground font-medium text-sm md:text-base max-w-lg">
-                Hover to explore my work. Click any card to view details.
-              </p>
-            </div>
+          <ProjectShowcase />
+        </section>
 
+        {/* Digital Marketing Section (Active Service) */}
+        <section className="py-24 px-6 md:px-8 border-t border-border">
+          <div className="max-w-7xl mx-auto flex flex-col items-center text-center space-y-8">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="flex justify-center"
+              className="space-y-4"
             >
-              <AnimatedFolder
-                title="Projects"
-                projects={PROJECTS.map((p, i) => ({
-                  id: String(i + 1),
-                  image: p.image,
-                  title: p.title,
-                  link: p.link,
-                }))}
-              />
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#003838] dark:bg-[#003838] border border-[#f4e1c1]/20 rounded-full">
+                <div className="w-1.5 h-1.5 bg-[#F4E1C1] rounded-full animate-pulse shadow-[0_0_10px_#F4E1C1]" />
+                <span className="text-[9px] font-black text-[#F4E1C1] uppercase tracking-[0.2em]">Active Service</span>
+              </div>
+
+              <h2 className="text-2xl md:text-3xl font-black tracking-tighter text-foreground">
+                DIGITAL MARKETING
+              </h2>
+
+              <p className="text-sm text-muted-foreground max-w-lg mx-auto leading-relaxed font-medium">
+                Driving brand growth and organic traffic through data-driven SEO, targeted ad campaigns, and explosive social strategies crafted for massive conversion rates.
+              </p>
             </motion.div>
           </div>
         </section>

@@ -10,7 +10,7 @@ import {
     Mail
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-
+import { CpuArchitecture } from "./cpu-architecture";
 export interface ProfileSlide {
     name: string;
     title: string;
@@ -64,18 +64,24 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                             <img
                                 src={currentSlide.imageUrl}
                                 alt={currentSlide.name}
-                                className='w-full h-full object-cover'
+                                className='w-full h-full object-cover rounded-[3rem]'
                                 draggable={false}
+                                decoding="async"
+                                loading="lazy"
                             />
                         </motion.div>
                     </AnimatePresence>
                 </div>
 
                 {/* Card */}
-                <div className='bg-[#eaf4f4]/90 dark:bg-[#003838]/90 backdrop-blur-3xl border border-[#4aabab]/40 dark:border-[#f4e1c1]/15 rounded-[3rem] shadow-2xl dark:shadow-[0_0_80px_rgba(0,0,0,0.9)] p-12 ml-[-120px] z-10 max-w-xl flex-1'>
+                <div className='bg-[#eaf4f4]/90 dark:bg-[#003838]/90 backdrop-blur-3xl border border-[#4aabab]/40 dark:border-[#f4e1c1]/15 rounded-[3rem] shadow-2xl dark:shadow-[0_0_80px_rgba(0,0,0,0.9)] p-12 ml-[-120px] z-10 max-w-xl flex-1 relative overflow-hidden'>
+                    <div className="absolute inset-0 z-0 opacity-30 dark:opacity-60 pointer-events-none flex items-center justify-center mix-blend-screen">
+                        <CpuArchitecture text="GPU" className="w-[130%] h-[130%] max-w-none text-[#008080] dark:text-[#F4E1C1]" />
+                    </div>
                     <AnimatePresence mode='wait'>
                         <motion.div
                             key={currentSlide.name + currentSlide.title}
+                            className="relative z-10"
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -20 }}
@@ -130,18 +136,24 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                             <img
                                 src={currentSlide.imageUrl}
                                 alt={currentSlide.name}
-                                className='w-full h-full object-cover'
+                                className='w-full h-full object-cover rounded-[2.5rem]'
                                 draggable={false}
+                                decoding="async"
+                                loading="lazy"
                             />
                         </motion.div>
                     </AnimatePresence>
                 </div>
 
-                {/* Card content */}
-                <div className='px-4 bg-[#003838]/95 dark:bg-[#003838]/95 backdrop-blur-2xl border border-[#f4e1c1]/15 rounded-[2.5rem] p-8 -mt-20 relative z-10'>
+                {/* Card content - Removed expensive backdrop blur and transparency for mobile performance */}
+                <div className='px-4 bg-[#eaf4f4] dark:bg-[#003838] border border-[#f4e1c1]/15 rounded-[2.5rem] p-8 -mt-20 relative z-10 shadow-xl overflow-hidden'>
+                    <div className="absolute inset-0 z-0 opacity-30 dark:opacity-60 pointer-events-none flex items-center justify-center mix-blend-plus-lighter">
+                        <CpuArchitecture text="GPU" className="w-[160%] h-[160%] max-w-none text-[#008080] dark:text-[#F4E1C1]" />
+                    </div>
                     <AnimatePresence mode='wait'>
                         <motion.div
                             key={currentSlide.name + currentSlide.title}
+                            className="relative z-10"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
