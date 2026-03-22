@@ -97,6 +97,20 @@ export default function RadialOrbitalTimeline({
 
   useEffect(() => {
     let rotationTimer: NodeJS.Timeout;
+    let isScrollingTimeout: NodeJS.Timeout;
+
+    const handleScroll = () => {
+      setAutoRotate(false);
+      clearTimeout(isScrollingTimeout);
+      isScrollingTimeout = setTimeout(() => {
+        setAutoRotate(true);
+      }, 150);
+    };
+
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", handleScroll, { passive: true });
+    }
+
     if (autoRotate && viewMode === "orbital") {
       rotationTimer = setInterval(() => {
         setRotationAngle((prev) => {
@@ -106,8 +120,10 @@ export default function RadialOrbitalTimeline({
       }, 50);
     }
     return () => {
-      if (rotationTimer) {
-        clearInterval(rotationTimer);
+      if (rotationTimer) clearInterval(rotationTimer);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("scroll", handleScroll);
+        clearTimeout(isScrollingTimeout);
       }
     };
   }, [autoRotate, viewMode]);

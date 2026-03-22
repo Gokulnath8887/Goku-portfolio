@@ -14,7 +14,8 @@
   --muted: 42 40% 93%;
   --muted-foreground: 180 30% 45%;
   --border: 180 25% 82%;
-  --accent: 180 100% 25%;           /* Teal */
+  --accent: 180 100% 25%;
+  /* Teal */
   --accent-foreground: 0 0% 100%;
   --secondary: 42 40% 95%;
   --secondary-foreground: 180 100% 20%;
@@ -26,14 +27,17 @@
 /* Dark mode → Teal palette */
 .dark,
 [data-theme="dark"] {
-  --background: 180 100% 25%;       /* #008080 Teal */
-  --foreground: 38 70% 86%;         /* #F4E1C1 Warm Sand */
+  --background: 180 100% 25%;
+  /* #008080 Teal */
+  --foreground: 38 70% 86%;
+  /* #F4E1C1 Warm Sand */
   --card: 180 80% 18%;
   --card-foreground: 38 70% 86%;
   --muted: 180 60% 20%;
   --muted-foreground: 180 20% 60%;
   --border: 180 50% 28%;
-  --accent: 38 70% 86%;             /* Warm Sand highlight */
+  --accent: 38 70% 86%;
+  /* Warm Sand highlight */
   --accent-foreground: 180 100% 10%;
   --secondary: 180 65% 20%;
   --secondary-foreground: 38 70% 86%;
@@ -79,7 +83,8 @@
 
   body {
     font-family: 'Outfit', sans-serif;
-    font-weight: 300; /* Defaulting to light as requested */
+    font-weight: 300;
+    /* Defaulting to light as requested */
     background-color: #faf7f0;
     color: #004040;
     transition: background-color 0.3s, color 0.3s;
@@ -99,6 +104,7 @@
 }
 
 @layer utilities {
+
   .font-black,
   .font-bold {
     font-family: 'Luckiest Guy', cursive, sans-serif !important;
@@ -139,9 +145,8 @@
 }
 
 .cpu-line-5 {
-  offset-path: path(
-    "M 135 65 h 15 q 5 0 5 5 v 10 q 0 5 -5 5 h -39.8 q -5 0 -5 -5 v -35"
-  );
+  offset-path: path("M 135 65 h 15 q 5 0 5 5 v 10 q 0 5 -5 5 h -39.8 q -5 0 -5 -5 v -35"
+    );
   animation-delay: 9s;
   animation-duration: 4s;
 }
@@ -153,9 +158,8 @@
 }
 
 .cpu-line-7 {
-  offset-path: path(
-    "M 88 88 v -15 q 0 -5 -5 -5 h -10 q -5 0 -5 -5 v -5 q 0 -5 5 -5 h 28"
-  );
+  offset-path: path("M 88 88 v -15 q 0 -5 -5 -5 h -10 q -5 0 -5 -5 v -5 q 0 -5 5 -5 h 28"
+    );
   animation-delay: 4s;
   animation-duration: 4s;
 }
@@ -170,6 +174,7 @@
   0% {
     offset-distance: 0%;
   }
+
   100% {
     offset-distance: 100%;
   }
