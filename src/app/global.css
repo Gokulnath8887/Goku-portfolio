@@ -6,44 +6,40 @@
 /* Primary bg: #008080 (Teal)  |  Accent: #F4E1C1 (Warm Sand) */
 
 :root {
-  /* Light mode → soft sandy warm tones */
-  --background: 42 80% 97%;
-  --foreground: 180 100% 20%;
-  --card: 42 50% 100%;
-  --card-foreground: 180 100% 20%;
-  --muted: 42 40% 93%;
-  --muted-foreground: 180 30% 45%;
-  --border: 180 25% 82%;
-  --accent: 180 100% 25%;
-  /* Teal */
+  /* Light mode → Lavender */
+  --background: 228 96% 89%; /* #C7D2FE */
+  --foreground: 204 100% 61%; /* #3AB0FF */
+  --card: 228 100% 95%;
+  --card-foreground: 204 100% 61%;
+  --muted: 228 60% 85%;
+  --muted-foreground: 204 70% 50%;
+  --border: 228 50% 80%;
+  --accent: 204 100% 61%;
   --accent-foreground: 0 0% 100%;
-  --secondary: 42 40% 95%;
-  --secondary-foreground: 180 100% 20%;
-  --folder-back: #d4e8e8;
-  --folder-front: #eaf4f4;
-  --folder-tab: #a0cccc;
+  --secondary: 228 60% 85%;
+  --secondary-foreground: 204 100% 61%;
+  --folder-back: #A5B4FC;
+  --folder-front: #C7D2FE;
+  --folder-tab: #818CF8;
 }
 
-/* Dark mode → Teal palette */
+/* Dark mode → Sky Blue palette */
 .dark,
 [data-theme="dark"] {
-  --background: 180 100% 25%;
-  /* #008080 Teal */
-  --foreground: 38 70% 86%;
-  /* #F4E1C1 Warm Sand */
-  --card: 180 80% 18%;
-  --card-foreground: 38 70% 86%;
-  --muted: 180 60% 20%;
-  --muted-foreground: 180 20% 60%;
-  --border: 180 50% 28%;
-  --accent: 38 70% 86%;
-  /* Warm Sand highlight */
-  --accent-foreground: 180 100% 10%;
-  --secondary: 180 65% 20%;
-  --secondary-foreground: 38 70% 86%;
-  --folder-back: #003a3a;
-  --folder-front: #004d4d;
-  --folder-tab: #002828;
+  --background: 204 100% 61%; /* #3AB0FF */
+  --foreground: 228 96% 89%; /* #C7D2FE */
+  --card: 204 80% 55%; /* #1E90FF */
+  --card-foreground: 228 96% 89%;
+  --muted: 204 90% 50%;
+  --muted-foreground: 228 70% 80%;
+  --border: 204 80% 50%;
+  --accent: 228 96% 89%;
+  --accent-foreground: 204 100% 30%;
+  --secondary: 204 90% 55%;
+  --secondary-foreground: 228 96% 89%;
+  --folder-back: #1485D5;
+  --folder-front: #1D93E5;
+  --folder-tab: #0E73B9;
 }
 
 @layer base {
@@ -64,42 +60,42 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #002828;
+    background: #1485D5;
     border-radius: 9999px;
   }
 
   .dark ::-webkit-scrollbar-thumb {
-    background: #f4e1c140;
+    background: #c7d2fe40;
     border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #003a3a;
+    background: #0E73B9;
   }
 
   .dark ::-webkit-scrollbar-thumb:hover {
-    background: #f4e1c170;
+    background: #c7d2fe70;
   }
 
   body {
     font-family: 'Outfit', sans-serif;
     font-weight: 300;
     /* Defaulting to light as requested */
-    background-color: #faf7f0;
-    color: #004040;
+    background-color: #E8EEFF;
+    color: #3AB0FF;
     transition: background-color 0.3s, color 0.3s;
   }
 
   .dark body,
   body.dark {
-    background-color: #008080;
-    color: #F4E1C1;
+    background-color: #3AB0FF;
+    color: #C7D2FE;
   }
 
   /* Ensure html.dark propagates correctly */
   html.dark {
-    background-color: #008080;
-    color: #F4E1C1;
+    background-color: #3AB0FF;
+    color: #C7D2FE;
   }
 }
 

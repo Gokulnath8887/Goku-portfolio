@@ -95,15 +95,33 @@ export default function RadialOrbitalTimeline({
     });
   };
 
+  const autoRotateRef = useRef(autoRotate);
+  const rotationAngleRef = useRef(0);
+  const viewModeRef = useRef(viewMode);
+  const expandedItemsRef = useRef(expandedItems);
+  const centerOffsetRef = useRef(centerOffset);
+  const activeNodeIdRef = useRef(activeNodeId);
+
   useEffect(() => {
-    let rotationTimer: NodeJS.Timeout;
+    autoRotateRef.current = autoRotate;
+    viewModeRef.current = viewMode;
+    expandedItemsRef.current = expandedItems;
+    centerOffsetRef.current = centerOffset;
+    activeNodeIdRef.current = activeNodeId;
+  }, [autoRotate, viewMode, expandedItems, centerOffset, activeNodeId]);
+
+  useEffect(() => {
+    let rotationTimer: number;
     let isScrollingTimeout: NodeJS.Timeout;
+    let isScrolling = false;
+    let lastTime = performance.now();
 
     const handleScroll = () => {
-      setAutoRotate(false);
+      isScrolling = true;
       clearTimeout(isScrollingTimeout);
       isScrollingTimeout = setTimeout(() => {
-        setAutoRotate(true);
+        isScrolling = false;
+        lastTime = performance.now();
       }, 150);
     };
 
@@ -111,22 +129,48 @@ export default function RadialOrbitalTimeline({
       window.addEventListener("scroll", handleScroll, { passive: true });
     }
 
-    if (autoRotate && viewMode === "orbital") {
-      rotationTimer = setInterval(() => {
-        setRotationAngle((prev) => {
-          const newAngle = (prev + 1.2) % 360; // 4x Faster Spin Rate
-          return Number(newAngle.toFixed(3));
+    const animate = (time: number) => {
+      if (autoRotateRef.current && viewModeRef.current === "orbital" && !isScrolling) {
+        const deltaTime = time - lastTime;
+        // 50ms => 1.2 degrees means 24 degrees per second (0.024 * deltaTime)
+        rotationAngleRef.current = (rotationAngleRef.current + deltaTime * 0.024) % 360;
+        
+        timelineData.forEach((item, index) => {
+          const el = nodeRefs.current[item.id];
+          if (el && !expandedItemsRef.current[item.id]) {
+            const angle = ((index / timelineData.length) * 360 + rotationAngleRef.current) % 360;
+            const radius = typeof window !== 'undefined' && window.innerWidth < 768 ? 240 : 420; 
+            const radian = (angle * Math.PI) / 180;
+
+            const x = radius * Math.cos(radian) + centerOffsetRef.current.x;
+            const y = radius * Math.sin(radian) + centerOffsetRef.current.y;
+
+            const zIndex = Math.round(10 + 5 * Math.cos(radian));
+            const opacity = Math.max(0.4, Math.min(1, 0.4 + 0.6 * ((1 + Math.sin(radian)) / 2)));
+
+            el.style.transform = `translate(${x}px, ${y}px)`;
+            el.style.zIndex = String(zIndex);
+            el.style.opacity = String(opacity);
+          }
         });
-      }, 50);
-    }
+      } else {
+        // sync angle back if not animating, so centerViewOnNode works when we resume
+        rotationAngleRef.current = rotationAngle;
+      }
+      lastTime = time;
+      rotationTimer = requestAnimationFrame(animate);
+    };
+
+    rotationTimer = requestAnimationFrame(animate);
+
     return () => {
-      if (rotationTimer) clearInterval(rotationTimer);
+      if (rotationTimer) cancelAnimationFrame(rotationTimer);
       if (typeof window !== "undefined") {
         window.removeEventListener("scroll", handleScroll);
         clearTimeout(isScrollingTimeout);
       }
     };
-  }, [autoRotate, viewMode]);
+  }, [timelineData, rotationAngle]);
 
   const centerViewOnNode = (nodeId: number) => {
     if (viewMode !== "orbital" || !nodeRefs.current[nodeId]) return;
@@ -134,10 +178,11 @@ export default function RadialOrbitalTimeline({
     const totalNodes = timelineData.length;
     const targetAngle = (nodeIndex / totalNodes) * 360;
     setRotationAngle(270 - targetAngle);
+    rotationAngleRef.current = 270 - targetAngle; // Override instantly
   };
 
   const calculateNodePosition = (index: number, total: number) => {
-    const angle = ((index / total) * 360 + rotationAngle) % 360;
+    const angle = ((index / total) * 360 + rotationAngleRef.current) % 360;
     // Majorly increased radius: mobile 240px, desktop 420px to circle the massive avatars perfectly
     const radius = typeof window !== 'undefined' && window.innerWidth < 768 ? 240 : 420; 
     const radian = (angle * Math.PI) / 180;
@@ -165,13 +210,13 @@ export default function RadialOrbitalTimeline({
   const getStatusStyles = (status: TimelineItem["status"]): string => {
     switch (status) {
       case "completed":
-        return "text-[#F4E1C1] bg-[#008080] border-transparent";
+        return "text-[#C7D2FE] bg-[#3AB0FF] border-transparent";
       case "in-progress":
-        return "text-[#003838] bg-[#F4E1C1] border-transparent";
+        return "text-[#1485D5] bg-[#C7D2FE] border-transparent";
       case "pending":
-        return "text-[#008080] bg-transparent border-[#008080]/50";
+        return "text-[#3AB0FF] bg-transparent border-[#3AB0FF]/50";
       default:
-        return "text-[#008080] bg-transparent border-[#008080]/50";
+        return "text-[#3AB0FF] bg-transparent border-[#3AB0FF]/50";
     }
   };
 
@@ -191,7 +236,7 @@ export default function RadialOrbitalTimeline({
           }}
         >
           {/* Outer ring heavily increased to match massive orbiting nodes */}
-          <div className="absolute w-[480px] h-[480px] md:w-[840px] md:h-[840px] rounded-full border border-[#008080]/20 pointer-events-none"></div>
+          <div className="absolute w-[480px] h-[480px] md:w-[840px] md:h-[840px] rounded-full border border-[#3AB0FF]/20 pointer-events-none"></div>
 
           {timelineData.map((item, index) => {
             const position = calculateNodePosition(index, timelineData.length);
@@ -235,18 +280,18 @@ export default function RadialOrbitalTimeline({
                   relative z-10 w-12 h-12 rounded-full flex items-center justify-center cursor-pointer shadow-xl
                   ${
                     isExpanded
-                      ? "bg-[#F4E1C1] text-[#003838]"
+                      ? "bg-[#C7D2FE] text-[#1485D5]"
                       : isRelated
-                      ? "bg-[#d4e8e8] text-[#008080]"
-                      : "bg-[#003838] text-[#F4E1C1]"
+                      ? "bg-[#C7D2FE] text-[#3AB0FF]"
+                      : "bg-[#1485D5] text-[#C7D2FE]"
                   }
                   border-2 
                   ${
                     isExpanded
-                      ? "border-[#F4E1C1] shadow-lg shadow-[#008080]/30"
+                      ? "border-[#C7D2FE] shadow-lg shadow-[#3AB0FF]/30"
                       : isRelated
-                      ? "border-[#008080] animate-[pulse_2s_ease-in-out_infinite]"
-                      : "border-[#008080]/80"
+                      ? "border-[#3AB0FF] animate-[pulse_2s_ease-in-out_infinite]"
+                      : "border-[#3AB0FF]/80"
                   }
                   transition-all duration-300 transform hover:scale-110
                   ${isExpanded ? "scale-125" : ""}
@@ -260,52 +305,52 @@ export default function RadialOrbitalTimeline({
                   absolute top-14 left-1/2 -translate-x-1/2 whitespace-nowrap
                   text-xs font-bold tracking-wider pointer-events-none
                   transition-all duration-300
-                  ${isExpanded ? "text-[#008080] scale-110" : "text-[#008080]/70 dark:text-[#F4E1C1]/70"}
+                  ${isExpanded ? "text-[#3AB0FF] scale-110" : "text-[#3AB0FF]/70 dark:text-[#C7D2FE]/70"}
                 `}
                 >
                   {item.title}
                 </div>
 
                 {isExpanded && (
-                  <Card className="absolute top-20 left-1/2 -translate-x-1/2 w-64 bg-[#003838]/95 backdrop-blur-lg border-[#008080] shadow-2xl overflow-visible z-50">
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-[#008080]/80"></div>
+                  <Card className="absolute top-20 left-1/2 -translate-x-1/2 w-64 bg-[#1485D5]/95 backdrop-blur-lg border-[#3AB0FF] shadow-2xl overflow-visible z-50">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-[#3AB0FF]/80"></div>
                     <CardHeader className="pb-2">
                       <div className="flex justify-between items-center">
                         <Badge className={`px-2 py-0 text-[10px] ${getStatusStyles(item.status)}`}>
                           {item.status === "completed" ? "COMPLETE" : item.status === "in-progress" ? "IN PROGRESS" : "PENDING"}
                         </Badge>
-                        <span className="text-xs font-mono text-[#F4E1C1]/60">
+                        <span className="text-xs font-mono text-[#C7D2FE]/60">
                           {item.date}
                         </span>
                       </div>
-                      <CardTitle className="text-sm mt-3 text-[#F4E1C1]">
+                      <CardTitle className="text-sm mt-3 text-[#C7D2FE]">
                         {item.title}
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="text-xs text-[#F4E1C1]/80 leading-relaxed font-medium">
+                    <CardContent className="text-xs text-[#C7D2FE]/80 leading-relaxed font-medium">
                       <p>{item.content}</p>
 
-                      <div className="mt-4 pt-3 border-t border-[#008080]/30">
+                      <div className="mt-4 pt-3 border-t border-[#3AB0FF]/30">
                         <div className="flex justify-between items-center text-xs mb-1">
-                          <span className="flex items-center text-[#F4E1C1]">
+                          <span className="flex items-center text-[#C7D2FE]">
                             <Zap size={10} className="mr-1 text-yellow-400" />
                             Energy Match
                           </span>
-                          <span className="font-mono text-[#F4E1C1] font-bold">{item.energy}%</span>
+                          <span className="font-mono text-[#C7D2FE] font-bold">{item.energy}%</span>
                         </div>
-                        <div className="w-full h-1.5 bg-[#008080]/20 rounded-full overflow-hidden">
+                        <div className="w-full h-1.5 bg-[#3AB0FF]/20 rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-gradient-to-r from-[#008080] to-[#F4E1C1]"
+                            className="h-full bg-gradient-to-r from-[#3AB0FF] to-[#C7D2FE]"
                             style={{ width: `${item.energy}%` }}
                           ></div>
                         </div>
                       </div>
 
                       {item.relatedIds.length > 0 && (
-                        <div className="mt-4 pt-3 border-t border-[#008080]/30">
+                        <div className="mt-4 pt-3 border-t border-[#3AB0FF]/30">
                           <div className="flex items-center mb-2">
-                            <Link size={10} className="text-[#F4E1C1]/50 mr-1" />
-                            <h4 className="text-[10px] uppercase tracking-widest font-bold text-[#F4E1C1]/50">
+                            <Link size={10} className="text-[#C7D2FE]/50 mr-1" />
+                            <h4 className="text-[10px] uppercase tracking-widest font-bold text-[#C7D2FE]/50">
                               Connected Nodes
                             </h4>
                           </div>
@@ -317,7 +362,7 @@ export default function RadialOrbitalTimeline({
                                   key={relatedId}
                                   variant="outline"
                                   size="sm"
-                                  className="flex items-center h-6 px-2 py-0 text-[10px] rounded-sm border-[#008080]/30 bg-transparent hover:bg-[#008080] text-[#F4E1C1] hover:text-[#F4E1C1] transition-all"
+                                  className="flex items-center h-6 px-2 py-0 text-[10px] rounded-sm border-[#3AB0FF]/30 bg-transparent hover:bg-[#3AB0FF] text-[#C7D2FE] hover:text-[#C7D2FE] transition-all"
                                   onClick={(e: React.MouseEvent) => {
                                     e.stopPropagation();
                                     toggleItem(relatedId);

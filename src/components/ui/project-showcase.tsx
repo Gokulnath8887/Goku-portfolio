@@ -150,7 +150,7 @@ export function ProjectShowcase() {
                         {/* Animated underline */}
                         <span
                           className={`
-                            absolute left-0 -bottom-1 h-[3px] bg-[#008080] dark:bg-[#F4E1C1]
+                            absolute left-0 -bottom-1 h-[3px] bg-[#3AB0FF] dark:bg-[#C7D2FE]
                             transition-all duration-300 ease-out
                             ${hoveredIndex === index ? "w-full" : "w-0"}
                           `}
@@ -161,7 +161,7 @@ export function ProjectShowcase() {
                     {/* Arrow that slides in */}
                     <ArrowUpRight
                       className={`
-                        w-6 h-6 text-[#008080] dark:text-[#F4E1C1]
+                        w-6 h-6 text-[#3AB0FF] dark:text-[#C7D2FE]
                         transition-all duration-300 ease-out
                         ${
                           hoveredIndex === index
