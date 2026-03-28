@@ -199,7 +199,7 @@ export default function PortfolioPage() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={toggleTheme}
-            className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-[#00FF88] dark:text-[#00FF88]/80 hover:text-[#00CC6D] dark:hover:text-[#00FF88] transition-all bg-[#00FF88]/5 dark:bg-[#00FF88]/10 border border-[#00FF88]/30 dark:border-[#00FF88]/20"
+            className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-foreground hover:text-accent transition-all bg-accent/10 dark:bg-accent/20 border border-accent/30 dark:border-accent/20 shadow-[0_0_10px_rgba(0,255,136,0.1)] hover:shadow-accent/40"
             aria-label="Toggle theme"
           >
             {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}

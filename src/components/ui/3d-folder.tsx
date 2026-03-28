@@ -71,7 +71,7 @@ export function AnimatedFolder({ title, projects, className }: AnimatedFolderPro
                 <div
                     className="absolute inset-0 rounded-2xl transition-opacity duration-500"
                     style={{
-                        background: "radial-gradient(circle at 50% 70%, rgba(255,255,255,0.4) 0%, transparent 70%)",
+                        background: "radial-gradient(circle at 50% 70%, rgba(0, 255, 136, 0.4) 0%, transparent 70%)",
                         opacity: isHovered ? 0.08 : 0,
                     }}
                 />
