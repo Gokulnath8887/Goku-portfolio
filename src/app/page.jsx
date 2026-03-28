@@ -199,7 +199,7 @@ export default function PortfolioPage() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={toggleTheme}
-            className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-[#2DA0EE] dark:text-[#c7d2fe80] hover:text-[#1485D5] dark:hover:text-[#C7D2FE] transition-all bg-[#3AB0FF]/5 dark:bg-[#c7d2fe]/8 border border-[#8AD5FF]/30 dark:border-[#c7d2fe]/20"
+            className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-[#00FF88] dark:text-[#00FF88]/80 hover:text-[#00CC6D] dark:hover:text-[#00FF88] transition-all bg-[#00FF88]/5 dark:bg-[#00FF88]/10 border border-[#00FF88]/30 dark:border-[#00FF88]/20"
             aria-label="Toggle theme"
           >
             {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
@@ -257,9 +257,9 @@ export default function PortfolioPage() {
               viewport={{ once: true }}
               className="space-y-4"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#1485D5] dark:bg-[#1485D5] border border-[#c7d2fe]/20 rounded-full">
-                <div className="w-1.5 h-1.5 bg-[#C7D2FE] rounded-full animate-pulse shadow-[0_0_10px_#C7D2FE]" />
-                <span className="text-[9px] font-black text-[#C7D2FE] uppercase tracking-[0.2em]">Active Service</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#00FF88]/20 dark:bg-[#00FF88]/10 border border-[#00FF88]/30 rounded-full">
+                <div className="w-1.5 h-1.5 bg-[#00FF88] rounded-full animate-pulse shadow-[0_0_10px_#00FF88]" />
+                <span className="text-[9px] font-black text-[#00FF88] uppercase tracking-[0.2em]">Active Service</span>
               </div>
 
               <h2 className="text-2xl md:text-3xl font-black tracking-tighter text-foreground">
@@ -282,8 +282,8 @@ export default function PortfolioPage() {
               viewport={{ once: true }}
               className="space-y-4"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#1485D5] dark:bg-[#1485D5] border border-[#c7d2fe]/20 rounded-full">
-                <div className="w-1.5 h-1.5 bg-[#C7D2FE] rounded-full animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#00FF88]/10 dark:bg-[#00FF88]/5 border border-[#00FF88]/20 rounded-full">
+                <div className="w-1.5 h-1.5 bg-[#00FF88]/50 rounded-full animate-pulse" />
                 <span className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.2em]">Under Construction</span>
               </div>
 
@@ -387,7 +387,7 @@ export default function PortfolioPage() {
                   link.click();
                   toast.success("Resume download started");
                 }}
-                className="w-full py-5 md:py-6 bg-[#C7D2FE] text-[#3AB0FF] font-black rounded-3xl md:rounded-[2rem] hover:bg-[#E8EEFF] transition-colors text-[10px] md:text-xs uppercase tracking-[0.3em] flex items-center justify-center gap-3 shadow-xl"
+                className="w-full py-5 md:py-6 bg-[#00FF88] text-[#0B0B0B] font-black rounded-3xl md:rounded-[2rem] hover:bg-[#00CC6D] transition-colors text-[10px] md:text-xs uppercase tracking-[0.3em] flex items-center justify-center gap-3 shadow-xl shadow-[#00FF88]/20"
               >
                 <FileText size={16} />
                 Download PDF Portfolio

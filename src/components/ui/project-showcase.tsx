@@ -150,18 +150,18 @@ export function ProjectShowcase() {
                         {/* Animated underline */}
                         <span
                           className={`
-                            absolute left-0 -bottom-1 h-[3px] bg-[#3AB0FF] dark:bg-[#C7D2FE]
+                            absolute left-0 -bottom-1 h-[3px] bg-[#00FF88]
                             transition-all duration-300 ease-out
                             ${hoveredIndex === index ? "w-full" : "w-0"}
                           `}
                         />
                       </span>
                     </h3>
-
+ 
                     {/* Arrow that slides in */}
                     <ArrowUpRight
                       className={`
-                        w-6 h-6 text-[#3AB0FF] dark:text-[#C7D2FE]
+                        w-6 h-6 text-[#00FF88]
                         transition-all duration-300 ease-out
                         ${
                           hoveredIndex === index

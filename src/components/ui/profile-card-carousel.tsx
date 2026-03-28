@@ -51,7 +51,7 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
             {/* Desktop layout */}
             <div className='hidden md:flex relative items-center justify-center pt-8'>
                 {/* Avatar */}
-                <div className='w-[470px] h-[470px] rounded-[3rem] overflow-hidden bg-[#C7D2FE] dark:bg-[#1485D5] flex-shrink-0 border border-[#8AD5FF]/30 dark:border-[#c7d2fe]/10 relative'>
+                <div className='w-[470px] h-[470px] rounded-[3rem] overflow-hidden bg-[#00FF88] dark:bg-[#0B0B0B] flex-shrink-0 border border-[#00FF88]/30 dark:border-[#00FF88]/10 relative'>
                     <AnimatePresence mode='wait'>
                         <motion.div
                             key={currentSlide.imageUrl}
@@ -74,9 +74,9 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                 </div>
 
                 {/* Card */}
-                <div className='bg-[#E0E7FF]/90 dark:bg-[#1485D5]/90 backdrop-blur-3xl border border-[#8AD5FF]/40 dark:border-[#c7d2fe]/15 rounded-[3rem] shadow-2xl dark:shadow-[0_0_80px_rgba(0,0,0,0.9)] p-12 ml-[-120px] z-10 max-w-xl flex-1 relative overflow-hidden'>
+                <div className='bg-[#0B0B0B]/90 dark:bg-[#0B0B0B]/95 backdrop-blur-3xl border border-[#00FF88]/20 dark:border-[#00FF88]/15 rounded-[3rem] shadow-2xl dark:shadow-[0_0_80px_rgba(0,0,0,0.9)] p-12 ml-[-120px] z-10 max-w-xl flex-1 relative overflow-hidden'>
                     <div className="absolute inset-0 z-0 opacity-40 dark:opacity-70 pointer-events-none flex items-center justify-center">
-                        <CpuArchitecture text="GPU" className="absolute inset-0 w-full h-full object-cover text-[#3AB0FF] dark:text-[#C7D2FE]" />
+                        <CpuArchitecture text="GPU" className="absolute inset-0 w-full h-full object-cover text-[#00FF88]" />
                     </div>
                     <AnimatePresence mode='wait'>
                         <motion.div
@@ -88,16 +88,16 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                         >
                             <div className='mb-8'>
-                                <h2 className='text-3xl font-black text-[#1485D5] dark:text-[#C7D2FE] mb-2 tracking-tight'>
+                                <h2 className='text-3xl font-black text-[#00FF88] mb-2 tracking-tight'>
                                     {currentSlide.name}
                                 </h2>
 
-                                <p className='text-sm font-bold tracking-widest uppercase text-[#2DA0EE] dark:text-[#c7d2fe80]'>
+                                <p className='text-sm font-bold tracking-widest uppercase text-[#00FF88]/70'>
                                     {currentSlide.title}
                                 </p>
                             </div>
 
-                            <p className='text-[#1B8FE1] dark:text-[#c7d2fecc] text-lg leading-relaxed mb-10 font-medium'>
+                            <p className='text-[#00FF88]/90 text-lg leading-relaxed mb-10 font-medium'>
                                 {currentSlide.description}
                             </p>
 
@@ -108,10 +108,10 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                                         href={url}
                                         target='_blank'
                                         rel='noopener noreferrer'
-                                        className='w-12 h-12 bg-[#3AB0FF]/5 dark:bg-[#c7d2fe]/8 border border-[#2DA0EE]/20 dark:border-[#c7d2fe]/20 rounded-full flex items-center justify-center transition-all duration-300 hover:bg-[#3AB0FF] dark:hover:bg-[#C7D2FE] hover:border-[#3AB0FF] dark:hover:border-[#C7D2FE] hover:scale-110 group cursor-pointer'
+                                        className='w-12 h-12 bg-[#00FF88]/10 border border-[#00FF88]/20 rounded-full flex items-center justify-center transition-all duration-300 hover:bg-[#00FF88] hover:scale-110 group cursor-pointer shadow-[0_0_15px_rgba(0,255,136,0.1)]'
                                         aria-label={label}
                                     >
-                                        <IconComponent className='w-5 h-5 text-[#1485D5] dark:text-[#C7D2FE] group-hover:text-white dark:group-hover:text-[#3AB0FF] transition-colors' />
+                                        <IconComponent className='w-5 h-5 text-[#00FF88] group-hover:text-[#0B0B0B] transition-colors' />
                                     </a>
                                 ))}
                             </div>
@@ -123,7 +123,7 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
             {/* Mobile layout */}
             <div className='md:hidden max-w-sm mx-auto text-center'>
                 {/* Avatar */}
-                <div className='w-full aspect-square bg-[#C7D2FE] dark:bg-[#1485D5] rounded-[2.5rem] overflow-hidden mb-8 border border-[#8AD5FF]/30 dark:border-[#c7d2fe]/10'>
+                <div className='w-full aspect-square bg-[#00FF88]/20 rounded-[2.5rem] overflow-hidden mb-8 border border-[#00FF88]/30'>
                     <AnimatePresence mode='wait'>
                         <motion.div
                             key={currentSlide.imageUrl}
@@ -145,14 +145,14 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                     </AnimatePresence>
                 </div>
 
-                <div className='px-4 bg-[#E0E7FF] dark:bg-[#1485D5] border border-[#c7d2fe]/15 rounded-[2.5rem] p-8 -mt-20 relative z-10 shadow-xl overflow-hidden'>
-                    <div className="absolute inset-0 z-0 opacity-40 dark:opacity-70 pointer-events-none flex items-center justify-center">
+                <div className='px-4 bg-[#0B0B0B] border border-[#00FF88]/20 rounded-[2.5rem] p-8 -mt-20 relative z-10 shadow-xl overflow-hidden'>
+                    <div className="absolute inset-0 z-0 opacity-40 pointer-events-none flex items-center justify-center">
                         <CpuArchitecture 
                             text="GPU" 
                             animateLines={false} 
                             animateMarkers={false} 
                             animateText={false} 
-                            className="absolute inset-0 w-full h-full object-cover text-[#3AB0FF] dark:text-[#C7D2FE]" 
+                            className="absolute inset-0 w-full h-full object-cover text-[#00FF88]" 
                         />
                     </div>
                     <AnimatePresence mode='wait'>
@@ -164,15 +164,15 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                         >
-                            <h2 className='text-2xl font-black text-[#C7D2FE] mb-2 tracking-tight'>
+                            <h2 className='text-2xl font-black text-[#00FF88] mb-2 tracking-tight'>
                                 {currentSlide.name}
                             </h2>
 
-                            <p className='text-[10px] font-bold tracking-widest uppercase text-[#c7d2fe70] mb-6'>
+                            <p className='text-[10px] font-bold tracking-widest uppercase text-[#00FF88]/50 mb-6'>
                                 {currentSlide.title}
                             </p>
 
-                            <p className='text-[#c7d2fecc] text-sm leading-relaxed mb-8 font-medium'>
+                            <p className='text-[#00FF88]/90 text-sm leading-relaxed mb-8 font-medium'>
                                 {currentSlide.description}
                             </p>
 
@@ -183,10 +183,10 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                                         href={url}
                                         target='_blank'
                                         rel='noopener noreferrer'
-                                        className='w-12 h-12 bg-[#c7d2fe]/8 border border-[#c7d2fe]/20 rounded-full flex items-center justify-center transition-all duration-300 hover:bg-[#C7D2FE] hover:border-[#C7D2FE] cursor-pointer group'
+                                        className='w-12 h-12 bg-[#00FF88]/10 border border-[#00FF88]/20 rounded-full flex items-center justify-center transition-all duration-300 hover:bg-[#00FF88] hover:border-[#00FF88] cursor-pointer group shadow-[0_0_15px_rgba(0,255,136,0.1)]'
                                         aria-label={label}
                                     >
-                                        <IconComponent className='w-5 h-5 text-[#C7D2FE] group-hover:text-[#3AB0FF] transition-colors' />
+                                        <IconComponent className='w-5 h-5 text-[#00FF88] group-hover:text-[#0B0B0B] transition-colors' />
                                     </a>
                                 ))}
                             </div>
@@ -200,7 +200,7 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                 <button
                     onClick={handlePrevious}
                     aria-label='Previous'
-                    className='w-12 h-12 rounded-full bg-[#c7d2fe]/8 border border-[#c7d2fe]/20 flex items-center justify-center hover:bg-[#c7d2fe]/20 transition-colors cursor-pointer text-[#C7D2FE] dark:text-[#C7D2FE]'
+                    className='w-12 h-12 rounded-full bg-[#00FF88]/5 border border-[#00FF88]/20 flex items-center justify-center hover:bg-[#00FF88]/20 transition-colors cursor-pointer text-[#00FF88]'
                 >
                     <ChevronLeft className='w-6 h-6' />
                 </button>
@@ -213,8 +213,8 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                             className={cn(
                                 "w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer",
                                 idx === currentIndex
-                                    ? "bg-[#C7D2FE] scale-125"
-                                    : "bg-[#c7d2fe]/25 hover:bg-[#c7d2fe]/50"
+                                    ? "bg-[#00FF88] scale-125 shadow-[0_0_10px_rgba(0,255,136,0.5)]"
+                                    : "bg-[#00FF88]/25 hover:bg-[#00FF88]/50"
                             )}
                             aria-label={`Go to slide ${idx + 1}`}
                         />
@@ -224,7 +224,7 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                 <button
                     onClick={handleNext}
                     aria-label='Next'
-                    className='w-12 h-12 rounded-full bg-[#c7d2fe]/8 border border-[#c7d2fe]/20 flex items-center justify-center hover:bg-[#c7d2fe]/20 transition-colors cursor-pointer text-[#C7D2FE] dark:text-[#C7D2FE]'
+                    className='w-12 h-12 rounded-full bg-[#00FF88]/5 border border-[#00FF88]/20 flex items-center justify-center hover:bg-[#00FF88]/20 transition-colors cursor-pointer text-[#00FF88]'
                 >
                     <ChevronRight className='w-6 h-6' />
                 </button>
