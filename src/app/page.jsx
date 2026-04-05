@@ -108,10 +108,10 @@ export default function PortfolioPage() {
   const containerRef = useRef(null);
   const { scrollY } = useScroll();
 
-  // Create a smoothed scroll value using useSpring to eliminate mobile scroll "jitter"
+  // Optimize spring for snappier feedback on mobile
   const smoothScrollY = useSpring(scrollY, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 120,
+    damping: 25,
     restDelta: 0.001
   });
 
@@ -179,7 +179,7 @@ export default function PortfolioPage() {
 
       <main className="relative z-10">
         {/* Centered Hero Section */}
-        <section className="relative flex flex-col items-center justify-center px-4 md:px-6 py-10 overflow-hidden">
+        <section className="relative flex flex-col items-center justify-center px-4 md:px-6 pt-12 pb-0 overflow-hidden">
           
           {/* Theme-Adaptive WebGL Light Rays */}
           <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20 z-0">
@@ -199,7 +199,7 @@ export default function PortfolioPage() {
           {/* Centered Profile Carousel */}
           <motion.div
             style={{ y: y1, opacity, scale }}
-            className="w-full transform-gpu will-change-transform z-10 pointer-events-none mt-20"
+            className="w-full transform-gpu will-change-transform z-10 mt-6"
           >
             <div className="pointer-events-auto">
               <ProfileCarousel slides={PROFILE_SLIDES} />

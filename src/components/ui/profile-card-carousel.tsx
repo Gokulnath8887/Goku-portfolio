@@ -50,7 +50,7 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
     return (
         <div className={cn("w-full max-w-5xl mx-auto px-4", className)}>
             {/* Desktop layout */}
-            <div className='hidden md:flex relative items-center justify-center pt-8'>
+            <div className='hidden md:flex relative items-center justify-center pt-0'>
                 {/* Avatar */}
                 <div className='w-[470px] h-[470px] rounded-[3rem] overflow-hidden bg-[#D39BC2]/50 dark:bg-[#D39BC2]/10 flex-shrink-0 border border-[#D39BC2]/20 dark:border-[#D39BC2]/10 relative'>
                     <AnimatePresence mode='wait'>
@@ -197,7 +197,7 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
             </div>
 
             {/* Bottom navigation */}
-            <div className='flex justify-center items-center gap-6 mt-12'>
+            <div className='flex justify-center items-center gap-6 mt-4'>
                 <button
                     onClick={handlePrevious}
                     aria-label='Previous'
