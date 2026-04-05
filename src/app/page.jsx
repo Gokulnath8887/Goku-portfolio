@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "motion/react";
 import resumeImage from "./resume.png"; // Import the local image file
 import profileImageFile from "./profile.png"; // Import the local profile image
 import {
@@ -20,28 +20,26 @@ import {
   Clock
 } from "lucide-react";
 import { Toaster, toast } from "sonner";
-import { LogoCloud } from "@/components/ui/logo-cloud-4";
+import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiFramer, SiNodedotjs, SiExpress, SiPostgresql, SiSupabase, SiVercel, SiGit, SiFigma } from 'react-icons/si';
+import LogoLoop from "@/components/ui/LogoLoop";
 import { ProfileCarousel } from "@/components/ui/profile-card-carousel";
 import { ProjectShowcase } from "@/components/ui/project-showcase";
-import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline";
+import LightRays from "@/components/ui/LightRays";
+import ShinyText from "@/components/ui/ShinyText";
 
 const TECH_LOGOS = [
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original-wordmark.svg", alt: "React" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original-wordmark.svg", alt: "Next.js" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original-wordmark.svg", alt: "Vue.js" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original-wordmark.svg", alt: "Node.js" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", alt: "JavaScript" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg", alt: "Tailwind CSS" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain-wordmark.svg", alt: "Firebase" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original-wordmark.svg", alt: "MongoDB" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original-wordmark.svg", alt: "PostgreSQL" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original-wordmark.svg", alt: "HTML5" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original-wordmark.svg", alt: "CSS3" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg", alt: "SCSS" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original-wordmark.svg", alt: "Java" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original-wordmark.svg", alt: "Express" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original-wordmark.svg", alt: "Supabase" },
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/threejs/threejs-original-wordmark.svg", alt: "Three.js" },
+  { node: <SiReact />, title: "React", href: "https://react.dev" },
+  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org" },
+  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org" },
+  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
+  { node: <SiFramer />, title: "Framer Motion", href: "https://www.framer.com/motion/" },
+  { node: <SiNodedotjs />, title: "Node.js", href: "https://nodejs.org" },
+  { node: <SiExpress />, title: "Express", href: "https://expressjs.com" },
+  { node: <SiPostgresql />, title: "PostgreSQL", href: "https://www.postgresql.org" },
+  { node: <SiSupabase />, title: "Supabase", href: "https://supabase.com" },
+  { node: <SiVercel />, title: "Vercel", href: "https://vercel.com" },
+  { node: <SiGit />, title: "Git", href: "https://git-scm.com" },
+  { node: <SiFigma />, title: "Figma", href: "https://www.figma.com" },
 ];
 
 
@@ -76,63 +74,7 @@ const PROFILE_SLIDES = [
   }
 ];
 
-const TIMELINE_DATA = [
-  {
-    id: 1,
-    title: "Planning",
-    date: "Jan 2024",
-    content: "Project planning and requirements gathering phase.",
-    category: "Planning",
-    icon: Calendar,
-    relatedIds: [2],
-    status: "completed",
-    energy: 100,
-  },
-  {
-    id: 2,
-    title: "Design",
-    date: "Feb 2024",
-    content: "UI/UX design and system architecture.",
-    category: "Design",
-    icon: FileText,
-    relatedIds: [1, 3],
-    status: "completed",
-    energy: 90,
-  },
-  {
-    id: 3,
-    title: "Development",
-    date: "Mar 2024",
-    content: "Core features implementation and testing.",
-    category: "Development",
-    icon: Code,
-    relatedIds: [2, 4],
-    status: "in-progress",
-    energy: 60,
-  },
-  {
-    id: 4,
-    title: "Testing",
-    date: "Apr 2024",
-    content: "User testing and bug fixes.",
-    category: "Testing",
-    icon: User,
-    relatedIds: [3, 5],
-    status: "pending",
-    energy: 30,
-  },
-  {
-    id: 5,
-    title: "Release",
-    date: "May 2024",
-    content: "Final deployment and release.",
-    category: "Release",
-    icon: Clock,
-    relatedIds: [4],
-    status: "pending",
-    energy: 10,
-  },
-];
+
 
 export default function PortfolioPage() {
   const [profileImage, setProfileImage] = useState(profileImageFile);
@@ -166,14 +108,21 @@ export default function PortfolioPage() {
   const containerRef = useRef(null);
   const { scrollY } = useScroll();
 
-  const y1 = useTransform(scrollY, [0, 500], [0, -100]);
-  const y2 = useTransform(scrollY, [0, 500], [0, 50]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
-  const scale = useTransform(scrollY, [0, 300], [1, 0.9]);
+  // Create a smoothed scroll value using useSpring to eliminate mobile scroll "jitter"
+  const smoothScrollY = useSpring(scrollY, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const y1 = useTransform(smoothScrollY, [0, 500], [0, -100]);
+  const y2 = useTransform(smoothScrollY, [0, 500], [0, 50]);
+  const opacity = useTransform(smoothScrollY, [0, 300], [1, 0]);
+  const scale = useTransform(smoothScrollY, [0, 300], [1, 0.9]);
 
   // Sticky Top Bar transforms
-  const topBarY = useTransform(scrollY, [400, 600], ["-100%", "0%"]);
-  const topBarOpacity = useTransform(scrollY, [400, 600], [0, 1]);
+  const topBarY = useTransform(smoothScrollY, [400, 600], ["-100%", "0%"]);
+  const topBarOpacity = useTransform(smoothScrollY, [400, 600], [0, 1]);
 
   return (
     <div
@@ -182,13 +131,37 @@ export default function PortfolioPage() {
     >
       <Toaster position="top-center" richColors />
 
-      {/* Sticky Top Tech Stack Bar */}
+      {/* Desktop: Sticky Top Tech Stack Bar (hidden on mobile) */}
       <motion.div
         style={{ y: topBarY, opacity: topBarOpacity }}
-        className="fixed top-0 left-0 w-full z-40 pointer-events-none transform-gpu will-change-transform"
+        className="fixed top-0 left-0 w-full z-40 pointer-events-none transform-gpu will-change-transform bg-background/80 backdrop-blur-3xl border-b border-border hidden md:block"
       >
-        <LogoCloud logos={TECH_LOGOS} className="pointer-events-auto" />
+        <LogoLoop 
+          logos={TECH_LOGOS} 
+          className="pointer-events-auto py-4" 
+          speed={100}
+          gap={80}
+          logoHeight={24}
+          fadeOut
+          fadeOutColor={isDarkMode ? "#0B0B0B" : "#D39BC2"}
+          scaleOnHover
+        />
       </motion.div>
+
+      {/* Mobile: Vertical strip on left margin (hidden on desktop) */}
+      <div className="fixed left-2 top-1/2 -translate-y-1/2 z-40 h-[60vh] w-8 md:hidden">
+        <LogoLoop 
+          logos={TECH_LOGOS} 
+          className="text-muted-foreground/60"
+          speed={80}
+          direction="down"
+          gap={28}
+          logoHeight={16}
+          fadeOut
+          fadeOutColor={isDarkMode ? "#0B0B0B" : "#D39BC2"}
+          width={28}
+        />
+      </div>
 
       <motion.nav
         style={{ opacity }}
@@ -199,7 +172,7 @@ export default function PortfolioPage() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={toggleTheme}
-            className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-foreground hover:text-accent transition-all bg-accent/10 dark:bg-accent/20 border border-accent/30 dark:border-accent/20 shadow-[0_0_10px_rgba(0,255,136,0.1)] hover:shadow-accent/40"
+            className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-foreground hover:text-accent transition-all bg-accent/10 dark:bg-accent/20 border border-accent/30 dark:border-accent/20 shadow-[0_0_10px_rgba(34,211,238,0.1)] hover:shadow-accent/40"
             aria-label="Toggle theme"
           >
             {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
@@ -221,16 +194,24 @@ export default function PortfolioPage() {
 
       <main className="relative z-10">
         {/* Centered Hero Section */}
-        <section className="relative min-h-screen flex flex-col items-center justify-center px-4 md:px-6 py-20 overflow-hidden">
+        <section className="relative min-h-[80vh] flex flex-col items-center justify-center px-4 md:px-6 py-10 overflow-hidden">
           
-          {/* Timeline background mounted behind the carousel synced with scroll animations */}
-          <motion.div 
-            style={{ y: y1, opacity, scale }}
-            className="absolute inset-0 w-full h-full transform-gpu will-change-transform"
-          >
-            <RadialOrbitalTimeline timelineData={TIMELINE_DATA} />
-          </motion.div>
-
+          {/* Theme-Adaptive WebGL Light Rays */}
+          <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20 z-0">
+            <LightRays
+              raysOrigin="top-center"
+              raysColor={isDarkMode ? "#A78BFA" : "#D39BC2"}
+              raysSpeed={0.8}
+              lightSpread={0.6}
+              rayLength={3}
+              followMouse={true}
+              mouseInfluence={0.15}
+              noiseAmount={0.05}
+              distortion={0.1}
+            />
+          </div>
+          
+          {/* Centered Profile Carousel */}
           <motion.div
             style={{ y: y1, opacity, scale }}
             className="w-full transform-gpu will-change-transform z-10 pointer-events-none"
@@ -244,7 +225,7 @@ export default function PortfolioPage() {
 
 
         {/* Projects — List Showcase */}
-        <section className="py-20 md:py-40 px-6 md:px-8">
+        <section className="py-6 md:py-12 px-6 md:px-8">
           <ProjectShowcase />
         </section>
 
@@ -257,13 +238,13 @@ export default function PortfolioPage() {
               viewport={{ once: true }}
               className="space-y-4"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#00FF88]/20 dark:bg-[#00FF88]/10 border border-[#00FF88]/30 rounded-full">
-                <div className="w-1.5 h-1.5 bg-[#00FF88] rounded-full animate-pulse shadow-[0_0_10px_#00FF88]" />
-                <span className="text-[9px] font-black text-[#00FF88] uppercase tracking-[0.2em]">Active Service</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#D39BC2]/30 dark:bg-[#D39BC2]/10 border border-[#D39BC2]/40 rounded-full">
+                <div className="w-1.5 h-1.5 bg-[#D39BC2] rounded-full animate-pulse shadow-[0_0_10px_#D39BC2]" />
+                <span className="text-[9px] font-black text-foreground uppercase tracking-[0.2em]">Active Service</span>
               </div>
 
               <h2 className="text-2xl md:text-3xl font-black tracking-tighter text-foreground">
-                DIGITAL MARKETING
+                <ShinyText text="DIGITAL MARKETING" speed={2} color={isDarkMode ? '#7a4d6e' : '#6b2d5e'} shineColor="#ffffff" spread={60} className="font-black" />
               </h2>
 
               <p className="text-sm text-muted-foreground max-w-lg mx-auto leading-relaxed font-medium">
@@ -282,13 +263,13 @@ export default function PortfolioPage() {
               viewport={{ once: true }}
               className="space-y-4"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#00FF88]/10 dark:bg-[#00FF88]/5 border border-[#00FF88]/20 rounded-full">
-                <div className="w-1.5 h-1.5 bg-[#00FF88]/50 rounded-full animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#D39BC2]/15 dark:bg-[#D39BC2]/5 border border-[#D39BC2]/25 rounded-full">
+                <div className="w-1.5 h-1.5 bg-[#D39BC2]/50 rounded-full animate-pulse" />
                 <span className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.2em]">Under Construction</span>
               </div>
 
               <h2 className="text-2xl md:text-3xl font-black tracking-tighter text-foreground">
-                AI AUTOMATION IN N8N
+                <ShinyText text="AI AUTOMATION IN N8N" speed={2} delay={0.5} color={isDarkMode ? '#7a4d6e' : '#6b2d5e'} shineColor="#ffffff" spread={60} className="font-black" />
               </h2>
 
               <p className="text-sm text-muted-foreground max-w-lg mx-auto leading-relaxed font-medium">
@@ -304,7 +285,7 @@ export default function PortfolioPage() {
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16 md:gap-0">
             <div className="text-center md:text-left space-y-4">
               <div className="text-xl md:text-2xl font-black tracking-tighter text-foreground">
-                GOKULNATH<span className="text-muted-foreground">.</span>
+                <ShinyText text="GOKULNATH" speed={3} color={isDarkMode ? '#7a4d6e' : '#6b2d5e'} shineColor="#ffffff" spread={55} className="font-black" /><span className="text-muted-foreground">.</span>
               </div>
               <div className="text-[10px] md:text-xs text-muted-foreground/60 font-extrabold tracking-[0.3em] uppercase">
                 © 2026 / Software Engineer & Designer
@@ -353,7 +334,7 @@ export default function PortfolioPage() {
               <div className="flex justify-between items-center px-2">
                 <div className="space-y-1">
                   <h2 className="text-2xl md:text-4xl font-black tracking-tighter text-foreground">
-                    CURRICULUM VITAE
+                    <ShinyText text="CURRICULUM VITAE" speed={2} color={isDarkMode ? '#7a4d6e' : '#6b2d5e'} shineColor="#ffffff" spread={60} className="font-black" />
                   </h2>
                   <p className="text-muted-foreground font-bold text-[10px] md:text-xs uppercase tracking-[0.2em]">P. Gokulnath / Resume</p>
                 </div>
@@ -387,7 +368,7 @@ export default function PortfolioPage() {
                   link.click();
                   toast.success("Resume download started");
                 }}
-                className="w-full py-5 md:py-6 bg-[#00FF88] text-[#0B0B0B] font-black rounded-3xl md:rounded-[2rem] hover:bg-[#00CC6D] transition-colors text-[10px] md:text-xs uppercase tracking-[0.3em] flex items-center justify-center gap-3 shadow-xl shadow-[#00FF88]/20"
+                className="w-full py-5 md:py-6 bg-[#D39BC2] text-white font-black rounded-3xl md:rounded-[2rem] hover:bg-[#c487b1] transition-colors text-[10px] md:text-xs uppercase tracking-[0.3em] flex items-center justify-center gap-3 shadow-xl shadow-[#D39BC2]/20"
               >
                 <FileText size={16} />
                 Download PDF Portfolio

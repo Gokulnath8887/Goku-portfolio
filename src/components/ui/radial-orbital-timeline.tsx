@@ -110,6 +110,20 @@ export default function RadialOrbitalTimeline({
     activeNodeIdRef.current = activeNodeId;
   }, [autoRotate, viewMode, expandedItems, centerOffset, activeNodeId]);
 
+  const [isVisibleInViewport, setIsVisibleInViewport] = useState(true);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisibleInViewport(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   useEffect(() => {
     let rotationTimer: number;
     let isScrollingTimeout: NodeJS.Timeout;
@@ -130,6 +144,11 @@ export default function RadialOrbitalTimeline({
     }
 
     const animate = (time: number) => {
+      if (!isVisibleInViewport) {
+        rotationTimer = requestAnimationFrame(animate); 
+        return;
+      }
+
       if (autoRotateRef.current && viewModeRef.current === "orbital" && !isScrolling) {
         const deltaTime = time - lastTime;
         // 50ms => 1.2 degrees means 24 degrees per second (0.024 * deltaTime)
@@ -148,7 +167,8 @@ export default function RadialOrbitalTimeline({
             const zIndex = Math.round(10 + 5 * Math.cos(radian));
             const opacity = Math.max(0.4, Math.min(1, 0.4 + 0.6 * ((1 + Math.sin(radian)) / 2)));
 
-            el.style.transform = `translate(${x}px, ${y}px)`;
+            // Use transform3d for GPU acceleration if available, though here translate is standard
+            el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
             el.style.zIndex = String(zIndex);
             el.style.opacity = String(opacity);
           }
@@ -210,13 +230,13 @@ export default function RadialOrbitalTimeline({
   const getStatusStyles = (status: TimelineItem["status"]): string => {
     switch (status) {
       case "completed":
-        return "text-[#0B0B0B] bg-[#00FF88] border-transparent";
+        return "text-white bg-[#D39BC2] border-transparent";
       case "in-progress":
-        return "text-[#00CC6D] bg-[#00FF88]/20 border border-[#00FF88]/30";
+        return "text-[#D39BC2] bg-[#D39BC2]/20 border border-[#D39BC2]/30";
       case "pending":
-        return "text-[#00FF88] bg-transparent border-[#00FF88]/50";
+        return "text-[#D39BC2] bg-transparent border-[#D39BC2]/50";
       default:
-        return "text-[#00FF88] bg-transparent border-[#00FF88]/50";
+        return "text-[#D39BC2] bg-transparent border-[#D39BC2]/50";
     }
   };
 
@@ -236,7 +256,7 @@ export default function RadialOrbitalTimeline({
           }}
         >
           {/* Outer ring heavily increased to match massive orbiting nodes */}
-          <div className="absolute w-[480px] h-[480px] md:w-[840px] md:h-[840px] rounded-full border border-[#00FF88]/20 pointer-events-none"></div>
+          <div className="absolute w-[480px] h-[480px] md:w-[840px] md:h-[840px] rounded-full border border-[#D39BC2]/20 pointer-events-none"></div>
 
           {timelineData.map((item, index) => {
             const position = calculateNodePosition(index, timelineData.length);
@@ -267,7 +287,7 @@ export default function RadialOrbitalTimeline({
                     isPulsing ? "animate-[pulse_1s_cubic-bezier(0.4,0,0.6,1)_infinite]" : ""
                   }`}
                   style={{
-                    background: `radial-gradient(circle, rgba(244, 225, 193, 0.3) 0%, rgba(244, 225, 193, 0) 70%)`,
+                    background: `radial-gradient(circle, rgba(211, 155, 194, 0.3) 0%, rgba(211, 155, 194, 0) 70%)`,
                     width: `${item.energy * 0.5 + 40}px`,
                     height: `${item.energy * 0.5 + 40}px`,
                     left: `-${(item.energy * 0.5 + 40 - 40) / 2}px`,
@@ -280,18 +300,18 @@ export default function RadialOrbitalTimeline({
                   relative z-10 w-12 h-12 rounded-full flex items-center justify-center cursor-pointer shadow-xl
                   ${
                     isExpanded
-                      ? "bg-[#00FF88] text-[#0B0B0B]"
+                      ? "bg-[#D39BC2] text-white"
                       : isRelated
-                      ? "bg-[#00FF88] text-[#0B0B0B]"
-                      : "bg-[#0B0B0B] text-[#00FF88]"
+                      ? "bg-[#D39BC2] text-white"
+                      : "bg-[#D39BC2]/10 text-[#D39BC2]"
                   }
                   border-2 
                   ${
                     isExpanded
-                      ? "border-[#00FF88] shadow-lg shadow-[#00FF88]/30"
+                      ? "border-[#D39BC2] shadow-lg shadow-[#D39BC2]/30"
                       : isRelated
-                      ? "border-[#00FF88] animate-[pulse_2s_ease-in-out_infinite]"
-                      : "border-[#00FF88]/80"
+                      ? "border-[#D39BC2] animate-[pulse_2s_ease-in-out_infinite]"
+                      : "border-[#D39BC2]/50"
                   }
                   transition-all duration-300 transform hover:scale-110
                   ${isExpanded ? "scale-125" : ""}
@@ -305,51 +325,51 @@ export default function RadialOrbitalTimeline({
                   absolute top-14 left-1/2 -translate-x-1/2 whitespace-nowrap
                   text-xs font-bold tracking-wider pointer-events-none
                   transition-all duration-300
-                  ${isExpanded ? "text-[#00FF88] scale-110" : "text-[#00FF88]/70 dark:text-[#00FF88]/70"}
+                  ${isExpanded ? "text-[#D39BC2] scale-110" : "text-[#D39BC2]/70 dark:text-[#D39BC2]/70"}
                 `}
                 >
                   {item.title}
                 </div>
 
                 {isExpanded && (
-                  <Card className="absolute top-20 left-1/2 -translate-x-1/2 w-64 bg-[#0B0B0B]/95 backdrop-blur-lg border-[#00FF88]/30 shadow-2xl overflow-visible z-50">
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-[#00FF88]/50"></div>
+                  <Card className="absolute top-20 left-1/2 -translate-x-1/2 w-64 bg-white/20 dark:bg-black/40 backdrop-blur-3xl border-white/20 shadow-2xl overflow-visible z-50">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-px h-3 bg-[#D39BC2]/50"></div>
                     <CardHeader className="pb-2">
                       <div className="flex justify-between items-center">
                         <Badge className={`px-2 py-0 text-[10px] ${getStatusStyles(item.status)}`}>
                           {item.status === "completed" ? "COMPLETE" : item.status === "in-progress" ? "IN PROGRESS" : "PENDING"}
                         </Badge>
-                        <span className="text-xs font-mono text-[#00FF88]/60">
+                        <span className="text-xs font-mono text-[#D39BC2]/60">
                           {item.date}
                         </span>
                       </div>
-                      <CardTitle className="text-sm mt-3 text-[#00FF88]">
+                      <CardTitle className="text-sm mt-3 text-[#D39BC2]">
                         {item.title}
                       </CardTitle>
                     </CardHeader>
-                    <CardContent className="text-xs text-[#00FF88]/80 leading-relaxed font-medium">
+                    <CardContent className="text-xs text-foreground/80 leading-relaxed font-medium">
                       <p>{item.content}</p>
-                      <div className="mt-4 pt-3 border-t border-[#00FF88]/20">
+                      <div className="mt-4 pt-3 border-t border-[#D39BC2]/20">
                         <div className="flex justify-between items-center text-xs mb-1">
-                          <span className="flex items-center text-[#00FF88]">
+                          <span className="flex items-center text-[#D39BC2]">
                             <Zap size={10} className="mr-1 text-yellow-400" />
                             Energy Match
                           </span>
-                          <span className="font-mono text-[#00FF88] font-bold">{item.energy}%</span>
+                          <span className="font-mono text-[#D39BC2] font-bold">{item.energy}%</span>
                         </div>
-                        <div className="w-full h-1.5 bg-[#00FF88]/10 rounded-full overflow-hidden">
+                        <div className="w-full h-1.5 bg-[#D39BC2]/10 rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-gradient-to-r from-[#00FF88] to-[#00CC6D]"
+                            className="h-full bg-gradient-to-r from-[#D39BC2] to-[#A78BFA]"
                             style={{ width: `${item.energy}%` }}
                           ></div>
                         </div>
                       </div>
 
                       {item.relatedIds.length > 0 && (
-                        <div className="mt-4 pt-3 border-t border-[#00FF88]/20">
+                        <div className="mt-4 pt-3 border-t border-[#D39BC2]/20">
                           <div className="flex items-center mb-2">
-                            <Link size={10} className="text-[#00FF88]/50 mr-1" />
-                            <h4 className="text-[10px] uppercase tracking-widest font-bold text-[#00FF88]/50">
+                            <Link size={10} className="text-[#D39BC2]/50 mr-1" />
+                            <h4 className="text-[10px] uppercase tracking-widest font-bold text-[#D39BC2]/50">
                               Connected Nodes
                             </h4>
                           </div>
@@ -361,7 +381,7 @@ export default function RadialOrbitalTimeline({
                                   key={relatedId}
                                   variant="outline"
                                   size="sm"
-                                  className="flex items-center h-6 px-2 py-0 text-[10px] rounded-sm border-[#00FF88]/30 bg-transparent hover:bg-[#00FF88] text-[#00FF88] hover:text-[#0B0B0B] transition-all"
+                                  className="flex items-center h-6 px-2 py-0 text-[10px] rounded-sm border-[#D39BC2]/30 bg-transparent hover:bg-[#D39BC2] text-[#D39BC2] hover:text-white transition-all"
                                   onClick={(e: React.MouseEvent) => {
                                     e.stopPropagation();
                                     toggleItem(relatedId);

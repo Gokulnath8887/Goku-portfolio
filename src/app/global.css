@@ -6,40 +6,40 @@
 /* Primary bg: #008080 (Teal)  |  Accent: #F4E1C1 (Warm Sand) */
 
 :root {
-  /* Light mode → Neon Green base */
-  --background: 152 100% 50%; /* #00FF88 */
-  --foreground: 0 0% 4.3%; /* #0B0B0B */
-  --card: 152 100% 45%;
-  --card-foreground: 0 0% 4.3%;
-  --muted: 152 50% 40%;
-  --muted-foreground: 0 0% 15%;
-  --border: 0 0% 4.3%;
-  --accent: 0 0% 4.3%;
-  --accent-foreground: 152 100% 50%;
-  --secondary: 152 80% 45%;
-  --secondary-foreground: 0 0% 4.3%;
-  --folder-back: #0B0B0B;
-  --folder-front: #00FF88;
-  --folder-tab: #00CC6D;
+  /* Sunshine / Lavender Theme (#D39BC2) - Reduced Intensity */
+  --background: 318 25% 85%; /* Softer, lighter background */
+  --foreground: 318 30% 20%; /* Less saturated deep purple */
+  --card: 318 25% 88% / 0.4;
+  --card-foreground: 318 30% 25%;
+  --muted: 318 20% 75%;
+  --muted-foreground: 318 20% 40%;
+  --border: 318 30% 50% / 0.15;
+  --accent: 318 40% 50%;
+  --accent-foreground: 0 0% 100%;
+  --secondary: 318 25% 75%;
+  --secondary-foreground: 318 30% 20%;
+  --folder-back: #D39BC2;
+  --folder-front: #A78BFA; /* Soft Violet */
+  --folder-tab: #C084FC;
 }
 
-/* Dark mode → Jet Black base */
+/* Dark mode version of Sunshine Theme */
 .dark,
 [data-theme="dark"] {
-  --background: 0 0% 4.3%; /* #0B0B0B */
-  --foreground: 152 100% 50%; /* #00FF88 */
-  --card: 0 0% 7%; /* Slightly lighter black */
-  --card-foreground: 152 100% 50%;
-  --muted: 0 0% 12%;
-  --muted-foreground: 152 60% 70%;
-  --border: 152 100% 50% / 0.2;
-  --accent: 152 100% 50%;
-  --accent-foreground: 0 0% 4.3%;
-  --secondary: 0 0% 15%;
-  --secondary-foreground: 152 100% 50%;
-  --folder-back: #00CC6D;
-  --folder-front: #0B0B0B;
-  --folder-tab: #00FF88;
+  --background: 318 25% 8%; /* Very Deep Gray/Purple */
+  --foreground: 318 20% 80%; /* Soft grayish lavender */
+  --card: 318 30% 12% / 0.6;
+  --card-foreground: 318 20% 85%;
+  --muted: 318 20% 15%;
+  --muted-foreground: 318 15% 60%;
+  --border: 318 25% 80% / 0.1;
+  --accent: 318 40% 65%;
+  --accent-foreground: 318 30% 10%;
+  --secondary: 318 25% 18%;
+  --secondary-foreground: 318 20% 85%;
+  --folder-back: #312E81;
+  --folder-front: #D39BC2;
+  --folder-tab: #818CF8;
 }
 
 @layer base {
@@ -60,42 +60,46 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #00FF88;
+    background: #22D3EE;
     border-radius: 9999px;
   }
 
   .dark ::-webkit-scrollbar-thumb {
-    background: #00FF8840;
+    background: #22D3EE40;
     border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #00CC6D;
+    background: #0F766E;
   }
 
   .dark ::-webkit-scrollbar-thumb:hover {
-    background: #00FF8870;
+    background: #22D3EE70;
   }
 
   body {
     font-family: 'Outfit', sans-serif;
     font-weight: 300;
-    /* Defaulting to Jet Black as requested */
-    background-color: #0B0B0B;
-    color: #00FF88;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
     transition: background-color 0.3s, color 0.3s;
+    scroll-behavior: smooth;
   }
 
   .dark body,
   body.dark {
-    background-color: #0B0B0B;
-    color: #00FF88;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 
   /* Ensure html.dark propagates correctly */
+  html {
+    scroll-behavior: smooth;
+  }
+  
   html.dark {
-    background-color: #0B0B0B;
-    color: #00FF88;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
 }
 

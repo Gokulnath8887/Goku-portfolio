@@ -36,7 +36,7 @@ const CpuArchitecture = ({
       <g
         stroke="currentColor"
         fill="none"
-        strokeWidth="0.3"
+        strokeWidth="0.5"
         strokeDasharray="100 100"
         pathLength="100"
         markerStart="url(#cpu-circle-marker)"
@@ -84,53 +84,53 @@ const CpuArchitecture = ({
         )}
       </g>
 
-      {/* 1. Blue Light */}
+      {/* 1. Hot Pink Light */}
       <g mask="url(#cpu-mask-1)">
         <circle
           className="cpu-architecture cpu-line-1"
           cx="0"
           cy="0"
-          r="8"
+          r="14"
           fill="url(#cpu-blue-grad)"
         />
       </g>
-      {/* 2. Yellow Light */}
+      {/* 2. Electric Blue Light */}
       <g mask="url(#cpu-mask-2)">
         <circle
           className="cpu-architecture cpu-line-2"
           cx="0"
           cy="0"
-          r="8"
+          r="14"
           fill="url(#cpu-yellow-grad)"
         />
       </g>
-      {/* 3. Pinkish Light */}
+      {/* 3. Violet Light */}
       <g mask="url(#cpu-mask-3)">
         <circle
           className="cpu-architecture cpu-line-3"
           cx="0"
           cy="0"
-          r="8"
+          r="14"
           fill="url(#cpu-pinkish-grad)"
         />
       </g>
-      {/* 4. White Light */}
+      {/* 4. Lime Green Light */}
       <g mask="url(#cpu-mask-4)">
         <circle
           className="cpu-architecture cpu-line-4"
           cx="0"
           cy="0"
-          r="8"
+          r="14"
           fill="url(#cpu-white-grad)"
         />
       </g>
-      {/* 5. Green Light */}
+      {/* 5. Cyan Light */}
       <g mask="url(#cpu-mask-5)">
         <circle
           className="cpu-architecture cpu-line-5"
           cx="0"
           cy="0"
-          r="8"
+          r="14"
           fill="url(#cpu-green-grad)"
         />
       </g>
@@ -140,17 +140,17 @@ const CpuArchitecture = ({
           className="cpu-architecture cpu-line-6"
           cx="0"
           cy="0"
-          r="8"
+          r="14"
           fill="url(#cpu-orange-grad)"
         />
       </g>
-      {/* 7. Cyan Light */}
+      {/* 7. Lavender Light */}
       <g mask="url(#cpu-mask-7)">
         <circle
           className="cpu-architecture cpu-line-7"
           cx="0"
           cy="0"
-          r="8"
+          r="14"
           fill="url(#cpu-cyan-grad)"
         />
       </g>
@@ -160,7 +160,7 @@ const CpuArchitecture = ({
           className="cpu-architecture cpu-line-8"
           cx="0"
           cy="0"
-          r="8"
+          r="14"
           fill="url(#cpu-rose-grad)"
         />
       </g>
@@ -228,7 +228,9 @@ const CpuArchitecture = ({
           width="30"
           height="20"
           rx="2"
-          fill="#181818"
+          fill="#1a0a14"
+          stroke="#D39BC2"
+          strokeWidth="0.4"
           filter="url(#cpu-light-shadow)"
         />
         {/* CPU Text */}
@@ -297,55 +299,60 @@ const CpuArchitecture = ({
             stroke="white"
           />
         </mask>
-        {/* Gradients */}
+        {/* Vivid Gradients */}
         <radialGradient id="cpu-blue-grad" fx="1">
-          <stop offset="0%" stopColor="#00FF88" />
-          <stop offset="50%" stopColor="#00CC6D" />
+          <stop offset="0%" stopColor="#ff2d9b" />   {/* Hot Pink */}
+          <stop offset="40%" stopColor="#c0185c" />
           <stop offset="100%" stopColor="transparent" />
         </radialGradient>
         <radialGradient id="cpu-yellow-grad" fx="1">
-          <stop offset="0%" stopColor="#00FF88" />
-          <stop offset="50%" stopColor="#00FF88" />
+          <stop offset="0%" stopColor="#00cfff" />   {/* Electric Cyan */}
+          <stop offset="40%" stopColor="#0080bb" />
           <stop offset="100%" stopColor="transparent" />
         </radialGradient>
         <radialGradient id="cpu-pinkish-grad" fx="1">
-          <stop offset="0%" stopColor="#00FF88" />
-          <stop offset="50%" stopColor="#00AA5B" />
+          <stop offset="0%" stopColor="#b76cff" />   {/* Violet */}
+          <stop offset="40%" stopColor="#6a0fcc" />
           <stop offset="100%" stopColor="transparent" />
         </radialGradient>
         <radialGradient id="cpu-white-grad" fx="1">
-          <stop offset="0%" stopColor="#00FF88" />
+          <stop offset="0%" stopColor="#39ff14" />   {/* Neon Lime */}
+          <stop offset="40%" stopColor="#1a8a00" />
           <stop offset="100%" stopColor="transparent" />
         </radialGradient>
         <radialGradient id="cpu-green-grad" fx="1">
-          <stop offset="0%" stopColor="#00FF88" />
+          <stop offset="0%" stopColor="#00f5ff" />   {/* Electric Cyan */}
+          <stop offset="40%" stopColor="#006e8a" />
           <stop offset="100%" stopColor="transparent" />
         </radialGradient>
         <radialGradient id="cpu-orange-grad" fx="1">
-          <stop offset="0%" stopColor="#00CC6D" />
+          <stop offset="0%" stopColor="#ff8c00" />   {/* Vivid Orange */}
+          <stop offset="40%" stopColor="#aa4400" />
           <stop offset="100%" stopColor="transparent" />
         </radialGradient>
         <radialGradient id="cpu-cyan-grad" fx="1">
-          <stop offset="0%" stopColor="#00FF88" />
+          <stop offset="0%" stopColor="#D39BC2" />   {/* Lavender */}
+          <stop offset="40%" stopColor="#8a3d72" />
           <stop offset="100%" stopColor="transparent" />
         </radialGradient>
         <radialGradient id="cpu-rose-grad" fx="1">
-          <stop offset="0%" stopColor="#008855" />
+          <stop offset="0%" stopColor="#ff4d6d" />   {/* Rose Red */}
+          <stop offset="40%" stopColor="#aa0033" />
           <stop offset="100%" stopColor="transparent" />
         </radialGradient>
         <filter
           id="cpu-light-shadow"
-          x="-50%"
-          y="-50%"
-          width="200%"
-          height="200%"
+          x="-100%"
+          y="-100%"
+          width="300%"
+          height="300%"
         >
           <feDropShadow
-            dx="1.5"
-            dy="1.5"
-            stdDeviation="1"
-            floodColor="black"
-            floodOpacity="0.1"
+            dx="0"
+            dy="0"
+            stdDeviation="3"
+            floodColor="#D39BC2"
+            floodOpacity="0.8"
           />
         </filter>
         <marker
@@ -381,35 +388,35 @@ const CpuArchitecture = ({
           <stop offset="0%" stopColor="#4F4F4F" />
           <stop offset="60%" stopColor="#121214" />
         </linearGradient>
-        {/* Add CPU Text Gradient */}
+        {/* Vivid CPU Text Gradient */}
         <linearGradient id="cpu-text-gradient" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#666666">
+          <stop offset="0%" stopColor="#8a3d72">
             <animate
               attributeName="offset"
               values="-2; -1; 0"
-              dur="5s"
+              dur="3s"
               repeatCount="indefinite"
               calcMode="spline"
               keyTimes="0; 0.5; 1"
               keySplines="0.4 0 0.2 1; 0.4 0 0.2 1"
             />
           </stop>
-          <stop offset="25%" stopColor="white">
+          <stop offset="25%" stopColor="#ffffff">
             <animate
               attributeName="offset"
               values="-1; 0; 1"
-              dur="5s"
+              dur="3s"
               repeatCount="indefinite"
               calcMode="spline"
               keyTimes="0; 0.5; 1"
               keySplines="0.4 0 0.2 1; 0.4 0 0.2 1"
             />
           </stop>
-          <stop offset="50%" stopColor="#666666">
+          <stop offset="50%" stopColor="#D39BC2">
             <animate
               attributeName="offset"
               values="0; 1; 2;"
-              dur="5s"
+              dur="3s"
               repeatCount="indefinite"
               calcMode="spline"
               keyTimes="0; 0.5; 1"
