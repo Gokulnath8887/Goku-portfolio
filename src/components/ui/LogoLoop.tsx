@@ -78,10 +78,7 @@ const useAnimationLoop = (
   hoverSpeed: number | undefined, 
   isVertical: boolean
 ) => {
-  const rafRef = useRef<number | null>(null);
-  const lastTimestampRef = useRef<number | null>(null);
-  const offsetRef = useRef(0);
-  const velocityRef = useRef(0);
+  const animationRef = useRef<Animation | null>(null);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -92,60 +89,57 @@ const useAnimationLoop = (
       window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const seqSize = isVertical ? seqHeight : seqWidth;
-
-    if (seqSize > 0) {
-      offsetRef.current = ((offsetRef.current % seqSize) + seqSize) % seqSize;
-      const transformValue = isVertical
-        ? `translate3d(0, ${-offsetRef.current}px, 0)`
-        : `translate3d(${-offsetRef.current}px, 0, 0)`;
-      track.style.transform = transformValue;
-    }
-
     if (prefersReduced) {
       track.style.transform = isVertical ? 'translate3d(0, 0, 0)' : 'translate3d(0, 0, 0)';
-      return () => {
-        lastTimestampRef.current = null;
-      };
+      return;
     }
 
-    const animate = (timestamp: number) => {
-      if (lastTimestampRef.current === null) {
-        lastTimestampRef.current = timestamp;
-      }
+    const seqSize = isVertical ? seqHeight : seqWidth;
+    if (seqSize <= 0 || targetVelocity <= 0) return;
 
-      const deltaTime = Math.max(0, timestamp - lastTimestampRef.current) / 1000;
-      lastTimestampRef.current = timestamp;
+    const durationMs = (seqSize / Math.abs(targetVelocity)) * 1000;
 
-      const target = isHovered && hoverSpeed !== undefined ? hoverSpeed : targetVelocity;
+    const keyframes = isVertical
+      ? [
+          { transform: 'translate3d(0, 0, 0)' },
+          { transform: `translate3d(0, -${seqSize}px, 0)` }
+        ]
+      : [
+          { transform: 'translate3d(0, 0, 0)' },
+          { transform: `translate3d(-${seqSize}px, 0, 0)` }
+        ];
 
-      const easingFactor = 1 - Math.exp(-deltaTime / ANIMATION_CONFIG.SMOOTH_TAU);
-      velocityRef.current += (target - velocityRef.current) * easingFactor;
+    // If reverse direction
+    if (targetVelocity < 0) {
+        keyframes.reverse();
+    }
 
-      if (seqSize > 0) {
-        let nextOffset = offsetRef.current + velocityRef.current * deltaTime;
-        nextOffset = ((nextOffset % seqSize) + seqSize) % seqSize;
-        offsetRef.current = nextOffset;
+    if (animationRef.current) {
+      animationRef.current.cancel();
+    }
 
-        const transformValue = isVertical
-          ? `translate3d(0, ${-offsetRef.current}px, 0)`
-          : `translate3d(${-offsetRef.current}px, 0, 0)`;
-        track.style.transform = transformValue;
-      }
-
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
-    rafRef.current = requestAnimationFrame(animate);
+    animationRef.current = track.animate(keyframes, {
+      duration: durationMs,
+      iterations: Infinity,
+      easing: 'linear',
+    });
 
     return () => {
-      if (rafRef.current !== null) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
+      if (animationRef.current) {
+        animationRef.current.cancel();
       }
-      lastTimestampRef.current = null;
     };
-  }, [targetVelocity, seqWidth, seqHeight, isHovered, hoverSpeed, isVertical, trackRef]);
+  }, [targetVelocity, seqWidth, seqHeight, isVertical, trackRef]);
+
+  useEffect(() => {
+    if (animationRef.current) {
+      if (isHovered && (hoverSpeed === 0 || hoverSpeed === undefined)) {
+        animationRef.current.pause();
+      } else {
+        animationRef.current.play();
+      }
+    }
+  }, [isHovered, hoverSpeed]);
 };
 
 interface LogoLoopProps {
