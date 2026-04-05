@@ -179,7 +179,7 @@ export default function PortfolioPage() {
 
       <main className="relative z-10">
         {/* Centered Hero Section */}
-        <section className="relative min-h-[80vh] flex flex-col items-center justify-center px-4 md:px-6 py-10 overflow-hidden">
+        <section className="relative flex flex-col items-center justify-center px-4 md:px-6 py-10 overflow-hidden">
           
           {/* Theme-Adaptive WebGL Light Rays */}
           <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20 z-0">
@@ -199,7 +199,7 @@ export default function PortfolioPage() {
           {/* Centered Profile Carousel */}
           <motion.div
             style={{ y: y1, opacity, scale }}
-            className="w-full transform-gpu will-change-transform z-10 pointer-events-none"
+            className="w-full transform-gpu will-change-transform z-10 pointer-events-none mt-20"
           >
             <div className="pointer-events-auto">
               <ProfileCarousel slides={PROFILE_SLIDES} />
@@ -210,7 +210,7 @@ export default function PortfolioPage() {
 
 
         {/* Projects — List Showcase */}
-        <section className="py-6 md:py-12 px-6 md:px-8">
+        <section className="pt-0 pb-12 px-6 md:px-8">
           <ProjectShowcase />
         </section>
 
