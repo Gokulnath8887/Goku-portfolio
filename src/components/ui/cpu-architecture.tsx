@@ -26,7 +26,7 @@ const CpuArchitecture = ({
 }: CpuArchitectureSvgProps) => {
   return (
     <svg
-      className={cn("text-muted", className)}
+      className={cn("text-muted transform-gpu will-change-transform", className)}
       width={width}
       height={height}
       viewBox="0 0 200 100"

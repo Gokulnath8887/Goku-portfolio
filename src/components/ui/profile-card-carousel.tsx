@@ -150,9 +150,9 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                     <div className="absolute inset-0 z-0 opacity-30 pointer-events-none flex items-center justify-center">
                         <CpuArchitecture 
                             text="GPU" 
-                            animateLines={false} 
-                            animateMarkers={false} 
-                            animateText={false} 
+                            animateLines={true} 
+                            animateMarkers={true} 
+                            animateText={true} 
                             className="absolute inset-0 w-full h-full object-cover text-[#D39BC2]" 
                         />
                     </div>
