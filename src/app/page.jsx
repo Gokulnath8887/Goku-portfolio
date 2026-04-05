@@ -131,10 +131,10 @@ export default function PortfolioPage() {
     >
       <Toaster position="top-center" richColors />
 
-      {/* Desktop: Sticky Top Tech Stack Bar (hidden on mobile) */}
+      {/* Sticky Top Tech Stack Bar */}
       <motion.div
         style={{ y: topBarY, opacity: topBarOpacity }}
-        className="fixed top-0 left-0 w-full z-40 pointer-events-none transform-gpu will-change-transform bg-background/80 backdrop-blur-3xl border-b border-border hidden md:block"
+        className="fixed top-0 left-0 w-full z-40 pointer-events-none transform-gpu will-change-transform bg-background/80 backdrop-blur-3xl border-b border-border"
       >
         <LogoLoop 
           logos={TECH_LOGOS} 
@@ -147,21 +147,6 @@ export default function PortfolioPage() {
           scaleOnHover
         />
       </motion.div>
-
-      {/* Mobile: Vertical strip on left margin (hidden on desktop) */}
-      <div className="fixed left-2 top-1/2 -translate-y-1/2 z-40 h-[60vh] w-8 md:hidden">
-        <LogoLoop 
-          logos={TECH_LOGOS} 
-          className="text-muted-foreground/60"
-          speed={80}
-          direction="down"
-          gap={28}
-          logoHeight={16}
-          fadeOut
-          fadeOutColor={isDarkMode ? "#0B0B0B" : "#D39BC2"}
-          width={28}
-        />
-      </div>
 
       <motion.nav
         style={{ opacity }}
