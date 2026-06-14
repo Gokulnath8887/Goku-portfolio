@@ -10,12 +10,20 @@ import './global.css';
 
 export const links = () => [];
 
+export const meta = () => {
+  return [
+    { title: "P GOKULNATH | FULLSTACK DEVELOPER | DIGITAL MARKETER" },
+    { name: "description", content: "Portfolio of P Gokulnath - Fullstack Developer & Digital Marketer" }
+  ];
+};
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>P GOKULNATH | FULLSTACK DEVELOPER | DIGITAL MARKETER</title>
         <Meta />
         <Links />
         <link rel="icon" href="/favicon.jpg" />
