@@ -37,8 +37,8 @@ export function ProjectShowcase() {
     <section className="relative w-full py-8 overflow-hidden bg-background/50">
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-4xl md:text-7xl font-black tracking-tighter text-foreground uppercase text-center mb-12 leading-none">
-          <ShinyText text="PROJECTS" speed={2} color="#8a3d72" shineColor="#ffffff" spread={55} className="font-black" /> <br className="md:hidden" />
-          <ShinyText text="LIVE PRODUCTION" speed={2.5} delay={1} color="#5a2a4a" shineColor="#D39BC2" spread={55} className="font-black" />
+          <ShinyText text="PROJECTS" speed={2} color="#1a0812" shineColor="#c084fc" spread={55} className="font-black" /> <br className="md:hidden" />
+          <ShinyText text="LIVE PRODUCTION" speed={2.5} delay={1} color="#1a0812" shineColor="#D39BC2" spread={55} className="font-black" />
         </h2>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-6">
@@ -80,11 +80,11 @@ export function ProjectShowcase() {
                   <div className="p-8 flex-1 flex flex-col justify-end bg-gradient-to-b from-transparent to-black/20">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-2xl font-black tracking-tight text-white uppercase leading-none">
-                        <ShinyText text={project.title} speed={2} color="#aaaaaa" shineColor="#ffffff" spread={55} className="font-black" />
+                        <ShinyText text={project.title} speed={2} color="#f0f0f0" shineColor="#ffffff" spread={55} className="font-black" />
                       </h3>
                       <ArrowUpRight className="text-[#D39BC2] opacity-0 group-hover:opacity-100 -translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300" />
                     </div>
-                    <p className="text-sm text-white/70 font-medium leading-relaxed line-clamp-2">
+                    <p className="text-sm text-white/80 font-semibold leading-relaxed line-clamp-2">
                       {project.description}
                     </p>
                   </div>

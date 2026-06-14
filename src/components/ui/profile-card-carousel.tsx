@@ -52,7 +52,7 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
             {/* Desktop layout */}
             <div className='hidden md:flex relative items-center justify-center pt-0'>
                 {/* Avatar */}
-                <div className='w-[470px] h-[470px] rounded-[3rem] overflow-hidden bg-[#D39BC2]/50 dark:bg-[#D39BC2]/10 flex-shrink-0 border border-[#D39BC2]/20 dark:border-[#D39BC2]/10 relative'>
+                <div className='w-[420px] h-[420px] lg:w-[470px] lg:h-[470px] rounded-[3rem] overflow-hidden bg-[#D39BC2]/30 flex-shrink-0 border border-[#D39BC2]/20 relative'>
                     <AnimatePresence mode='wait'>
                         <motion.div
                             key={currentSlide.imageUrl}
@@ -75,8 +75,8 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                 </div>
 
                 {/* Card */}
-                <div className='bg-[#D39BC2]/20 dark:bg-[#D39BC2]/10 backdrop-blur-2xl md:backdrop-blur-3xl border border-white/10 rounded-[3rem] shadow-[0_8px_32px_rgba(211,155,194,0.1)] p-12 ml-[-120px] z-10 max-w-xl flex-1 relative overflow-hidden transform-gpu'>
-                    <div className="absolute inset-0 z-0 opacity-30 dark:opacity-40 pointer-events-none flex items-center justify-center">
+                <div className='bg-white/70 backdrop-blur-2xl border border-[#D39BC2]/20 rounded-[3rem] shadow-[0_8px_32px_rgba(211,155,194,0.15)] p-8 lg:p-12 ml-[-100px] lg:ml-[-120px] z-10 max-w-xl flex-1 relative overflow-hidden transform-gpu'>
+                    <div className="absolute inset-0 z-0 opacity-25 pointer-events-none flex items-center justify-center">
                         <CpuArchitecture text="GPU" className="absolute inset-0 w-full h-full object-cover text-[#D39BC2]" />
                     </div>
                     <AnimatePresence mode='wait'>
@@ -89,16 +89,16 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                         >
                             <div className='mb-8'>
-                                <h2 className='text-3xl font-black text-[#D39BC2] mb-2 tracking-tight'>
-                                    <ShinyText text={currentSlide.name} speed={2} color="#8a3d72" shineColor="#ffffff" spread={55} className="font-black" />
+                                <h2 className='text-3xl font-black text-foreground mb-2 tracking-tight'>
+                                    <ShinyText text={currentSlide.name} speed={2} color="#1a0812" shineColor="#c084fc" spread={55} className="font-black" />
                                 </h2>
 
-                                <p className='text-sm font-bold tracking-widest uppercase text-[#D39BC2]/70'>
+                                <p className='text-xs font-semibold tracking-widest uppercase text-foreground/50'>
                                     {currentSlide.title}
                                 </p>
                             </div>
 
-                            <p className='text-foreground/80 text-lg leading-relaxed mb-10 font-medium'>
+                            <p className='text-foreground/70 text-base leading-relaxed mb-10 font-semibold'>
                                 {currentSlide.description}
                             </p>
 
@@ -124,7 +124,7 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
             {/* Mobile layout */}
             <div className='md:hidden max-w-sm mx-auto text-center'>
                 {/* Avatar */}
-                <div className='w-full aspect-square bg-[#D39BC2]/10 rounded-[2.5rem] overflow-hidden mb-8 border border-[#D39BC2]/10'>
+                <div className='w-full aspect-square bg-[#D39BC2]/20 rounded-[2.5rem] overflow-hidden mb-8 border border-[#D39BC2]/20'>
                     <AnimatePresence mode='wait'>
                         <motion.div
                             key={currentSlide.imageUrl}
@@ -146,8 +146,8 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                     </AnimatePresence>
                 </div>
 
-                <div className='px-4 bg-[#D39BC2]/20 border border-white/10 rounded-[2.5rem] p-8 -mt-20 relative z-10 shadow-lg overflow-hidden'>
-                    <div className="absolute inset-0 z-0 opacity-30 pointer-events-none flex items-center justify-center">
+                <div className='px-4 bg-white/70 border border-[#D39BC2]/20 rounded-[2.5rem] p-8 -mt-20 relative z-10 shadow-lg overflow-hidden'>
+                    <div className="absolute inset-0 z-0 opacity-20 pointer-events-none flex items-center justify-center">
                         <CpuArchitecture 
                             text="GPU" 
                             animateLines={true} 
@@ -165,15 +165,15 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                         >
-                            <h2 className='text-2xl font-black text-[#D39BC2] mb-2 tracking-tight'>
-                                <ShinyText text={currentSlide.name} speed={2} color="#8a3d72" shineColor="#ffffff" spread={55} className="font-black" />
+                            <h2 className='text-2xl font-black text-foreground mb-2 tracking-tight'>
+                                <ShinyText text={currentSlide.name} speed={2} color="#1a0812" shineColor="#c084fc" spread={55} className="font-black" />
                             </h2>
 
-                            <p className='text-[10px] font-bold tracking-widest uppercase text-[#D39BC2]/50 mb-6'>
+                            <p className='text-[10px] font-semibold tracking-widest uppercase text-foreground/45 mb-6'>
                                 {currentSlide.title}
                             </p>
 
-                            <p className='text-foreground/80 text-sm leading-relaxed mb-8 font-medium'>
+                            <p className='text-foreground/65 text-sm leading-relaxed mb-8 font-semibold'>
                                 {currentSlide.description}
                             </p>
 

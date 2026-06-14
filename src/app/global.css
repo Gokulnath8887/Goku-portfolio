@@ -3,47 +3,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Primary bg: #008080 (Teal)  |  Accent: #F4E1C1 (Warm Sand) */
 
 :root {
-  /* Sunshine / Lavender Theme (#D39BC2) - Reduced Intensity */
-  --background: 318 25% 85%; /* Softer, lighter background */
-  --foreground: 318 30% 20%; /* Less saturated deep purple */
-  --card: 318 25% 88% / 0.4;
-  --card-foreground: 318 30% 25%;
-  --muted: 318 20% 75%;
-  --muted-foreground: 318 20% 40%;
-  --border: 318 30% 50% / 0.15;
-  --accent: 318 40% 50%;
+  /* Light-only Theme — Soft Lavender / Warm Sand */
+  --background: 318 30% 93%;
+  --foreground: 318 40% 18%;
+  --card: 318 25% 95%;
+  --card-foreground: 318 35% 20%;
+  --muted: 318 20% 82%;
+  --muted-foreground: 318 20% 42%;
+  --border: 318 30% 72% / 0.35;
+  --accent: 318 50% 52%;
   --accent-foreground: 0 0% 100%;
-  --secondary: 318 25% 75%;
+  --secondary: 318 25% 85%;
   --secondary-foreground: 318 30% 20%;
   --folder-back: #D39BC2;
-  --folder-front: #A78BFA; /* Soft Violet */
+  --folder-front: #A78BFA;
   --folder-tab: #C084FC;
 }
 
-/* Dark mode version of Sunshine Theme */
-.dark,
-[data-theme="dark"] {
-  --background: 318 25% 8%; /* Very Deep Gray/Purple */
-  --foreground: 318 20% 80%; /* Soft grayish lavender */
-  --card: 318 30% 12% / 0.6;
-  --card-foreground: 318 20% 85%;
-  --muted: 318 20% 15%;
-  --muted-foreground: 318 15% 60%;
-  --border: 318 25% 80% / 0.1;
-  --accent: 318 40% 65%;
-  --accent-foreground: 318 30% 10%;
-  --secondary: 318 25% 18%;
-  --secondary-foreground: 318 20% 85%;
-  --folder-back: #312E81;
-  --folder-front: #D39BC2;
-  --folder-tab: #818CF8;
-}
-
 @layer base {
-
   input,
   textarea,
   select,
@@ -60,21 +39,16 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #22D3EE;
-    border-radius: 9999px;
-  }
-
-  .dark ::-webkit-scrollbar-thumb {
-    background: #22D3EE40;
+    background: #D39BC2;
     border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #0F766E;
+    background: #b57ca8;
   }
 
-  .dark ::-webkit-scrollbar-thumb:hover {
-    background: #22D3EE70;
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
@@ -82,29 +56,31 @@
     font-weight: 300;
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    transition: background-color 0.3s, color 0.3s;
     scroll-behavior: smooth;
+    min-height: 100vh;
+    overflow-x: hidden;
   }
 
-  .dark body,
-  body.dark {
-    background-color: hsl(var(--background));
+  /* All headings: bold black baseline */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 900;
     color: hsl(var(--foreground));
+    line-height: 1.1;
   }
 
-  /* Ensure html.dark propagates correctly */
-  html {
-    scroll-behavior: smooth;
+  /* Subtext / paragraph: minimal semibold for readability */
+  p, span, li, label {
+    font-weight: 600;
   }
-  
-  html.dark {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
+
+  /* Muted/secondary spans keep lighter weight */
+  .text-muted-foreground,
+  [class*="muted"] {
+    font-weight: 500;
   }
 }
 
 @layer utilities {
-
   .font-black,
   .font-bold {
     font-family: 'Luckiest Guy', cursive, sans-serif !important;

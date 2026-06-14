@@ -2,22 +2,14 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "motion/react";
-import resumeImage from "./resume.png"; // Import the local image file
-import profileImageFile from "./profile.png"; // Import the local profile image
+import resumeImage from "./resume.png";
+import profileImageFile from "./profile.png";
 import {
   Github,
   Linkedin,
   Mail,
-  ExternalLink,
   FileText,
-  ChevronRight,
   Sparkles,
-  Sun,
-  Moon,
-  Calendar,
-  Code,
-  User,
-  Clock
 } from "lucide-react";
 import { Toaster, toast } from "sonner";
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiFramer, SiNodedotjs, SiExpress, SiPostgresql, SiSupabase, SiVercel, SiGit, SiFigma } from 'react-icons/si';
@@ -41,8 +33,6 @@ const TECH_LOGOS = [
   { node: <SiGit />, title: "Git", href: "https://git-scm.com" },
   { node: <SiFigma />, title: "Figma", href: "https://www.figma.com" },
 ];
-
-
 
 const PROFILE_SLIDES = [
   {
@@ -74,41 +64,18 @@ const PROFILE_SLIDES = [
   }
 ];
 
-
-
 export default function PortfolioPage() {
-  const [profileImage, setProfileImage] = useState(profileImageFile);
   const [isResumeOpen, setIsResumeOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
 
+  // Ensure light mode is always active
   useEffect(() => {
-    // Check local storage for theme preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      setIsDarkMode(false);
-      document.documentElement.classList.remove('dark');
-    } else {
-      setIsDarkMode(true);
-      document.documentElement.classList.add('dark');
-    }
+    document.documentElement.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
   }, []);
-
-  const toggleTheme = () => {
-    if (isDarkMode) {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-      setIsDarkMode(false);
-    } else {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-      setIsDarkMode(true);
-    }
-  };
 
   const containerRef = useRef(null);
   const { scrollY } = useScroll();
 
-  // Optimize spring for snappier feedback on mobile
   const smoothScrollY = useSpring(scrollY, {
     stiffness: 120,
     damping: 25,
@@ -116,55 +83,43 @@ export default function PortfolioPage() {
   });
 
   const y1 = useTransform(smoothScrollY, [0, 500], [0, -100]);
-  const y2 = useTransform(smoothScrollY, [0, 500], [0, 50]);
   const opacity = useTransform(smoothScrollY, [0, 300], [1, 0]);
   const scale = useTransform(smoothScrollY, [0, 300], [1, 0.9]);
 
-  // Sticky Top Bar transforms
+  // Sticky Top Bar transforms — slides in from top after scrolling
   const topBarY = useTransform(smoothScrollY, [400, 600], ["-100%", "0%"]);
   const topBarOpacity = useTransform(smoothScrollY, [400, 600], [0, 1]);
 
   return (
     <div
       ref={containerRef}
-      className="min-h-screen bg-background text-foreground selection:bg-foreground/20 overflow-x-hidden font-sans transition-colors duration-300"
+      className="min-h-screen bg-background text-foreground selection:bg-foreground/20 overflow-x-hidden font-sans"
     >
       <Toaster position="top-center" richColors />
 
-      {/* Sticky Top Tech Stack Bar */}
+      {/* Sticky Top Tech Stack Bar — always pointer-events-auto so logos are clickable */}
       <motion.div
         style={{ y: topBarY, opacity: topBarOpacity }}
-        className="fixed top-0 left-0 w-full z-40 pointer-events-none transform-gpu will-change-transform bg-background/80 backdrop-blur-3xl border-b border-border"
+        className="fixed top-0 left-0 w-full z-40 bg-background/90 backdrop-blur-2xl border-b border-border shadow-sm"
       >
-        <LogoLoop 
-          logos={TECH_LOGOS} 
-          className="pointer-events-auto py-4" 
+        <LogoLoop
+          logos={TECH_LOGOS}
+          className="py-3 sm:py-4"
           speed={100}
-          gap={80}
-          logoHeight={24}
+          gap={60}
+          logoHeight={22}
           fadeOut
-          fadeOutColor={isDarkMode ? "#0B0B0B" : "#D39BC2"}
+          fadeOutColor="#EDD8E8"
           scaleOnHover
         />
       </motion.div>
 
+      {/* Top Nav — Resume button only (no theme toggle) */}
       <motion.nav
         style={{ opacity }}
-        className="fixed top-0 w-full z-50 px-4 md:px-8 py-6 flex justify-between items-center pointer-events-none transform-gpu will-change-[opacity]"
+        className="fixed top-0 w-full z-50 px-4 md:px-8 py-5 flex justify-end items-center pointer-events-none"
       >
-        <div className="flex gap-4 items-center bg-card/40 backdrop-blur-md md:backdrop-blur-2xl px-4 py-3 rounded-full border border-border pointer-events-auto">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={toggleTheme}
-            className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-foreground hover:text-accent transition-all bg-accent/10 dark:bg-accent/20 border border-accent/30 dark:border-accent/20 shadow-[0_0_10px_rgba(34,211,238,0.1)] hover:shadow-accent/40"
-            aria-label="Toggle theme"
-          >
-            {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
-          </motion.button>
-        </div>
-
-        <div className="flex gap-4 md:gap-8 items-center bg-card/40 backdrop-blur-md md:backdrop-blur-2xl px-4 md:px-6 py-3 rounded-full border border-border pointer-events-auto">
+        <div className="flex gap-4 md:gap-8 items-center bg-white/60 backdrop-blur-md px-4 md:px-6 py-3 rounded-full border border-[#D39BC2]/30 shadow-sm pointer-events-auto">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -178,14 +133,14 @@ export default function PortfolioPage() {
       </motion.nav>
 
       <main className="relative z-10">
-        {/* Centered Hero Section */}
+        {/* Hero Section */}
         <section className="relative flex flex-col items-center justify-center px-4 md:px-6 pt-12 pb-0 overflow-hidden">
-          
-          {/* Theme-Adaptive WebGL Light Rays */}
-          <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20 z-0">
+
+          {/* Light Rays background */}
+          <div className="absolute inset-0 pointer-events-none opacity-50 z-0">
             <LightRays
               raysOrigin="top-center"
-              raysColor={isDarkMode ? "#A78BFA" : "#D39BC2"}
+              raysColor="#D39BC2"
               raysSpeed={0.8}
               lightSpread={0.6}
               rayLength={3}
@@ -195,8 +150,8 @@ export default function PortfolioPage() {
               distortion={0.1}
             />
           </div>
-          
-          {/* Centered Profile Carousel */}
+
+          {/* Profile Carousel */}
           <motion.div
             style={{ y: y1, opacity, scale }}
             className="w-full transform-gpu will-change-transform z-10 mt-6"
@@ -207,15 +162,13 @@ export default function PortfolioPage() {
           </motion.div>
         </section>
 
-
-
-        {/* Projects — List Showcase */}
-        <section className="pt-0 pb-12 px-6 md:px-8">
+        {/* Projects Section */}
+        <section className="pt-0 pb-12 px-4 sm:px-6 md:px-8">
           <ProjectShowcase />
         </section>
 
-        {/* Digital Marketing Section (Active Service) */}
-        <section className="py-24 px-6 md:px-8 border-t border-border">
+        {/* Digital Marketing Section */}
+        <section className="py-16 sm:py-24 px-4 sm:px-6 md:px-8 border-t border-border">
           <div className="max-w-7xl mx-auto flex flex-col items-center text-center space-y-8">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -223,24 +176,24 @@ export default function PortfolioPage() {
               viewport={{ once: true }}
               className="space-y-4"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#D39BC2]/30 dark:bg-[#D39BC2]/10 border border-[#D39BC2]/40 rounded-full">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#D39BC2]/20 border border-[#D39BC2]/40 rounded-full">
                 <div className="w-1.5 h-1.5 bg-[#D39BC2] rounded-full animate-pulse shadow-[0_0_10px_#D39BC2]" />
                 <span className="text-[9px] font-black text-foreground uppercase tracking-[0.2em]">Active Service</span>
               </div>
 
               <h2 className="text-2xl md:text-3xl font-black tracking-tighter text-foreground">
-                <ShinyText text="DIGITAL MARKETING" speed={2} color={isDarkMode ? '#7a4d6e' : '#6b2d5e'} shineColor="#ffffff" spread={60} className="font-black" />
+                <ShinyText text="DIGITAL MARKETING" speed={2} color="#1a0812" shineColor="#c084fc" spread={60} className="font-black" />
               </h2>
 
-              <p className="text-sm text-muted-foreground max-w-lg mx-auto leading-relaxed font-medium">
+              <p className="text-sm text-foreground/60 max-w-lg mx-auto leading-relaxed font-semibold">
                 Driving brand growth and organic traffic through data-driven SEO, targeted ad campaigns, and explosive social strategies crafted for massive conversion rates.
               </p>
             </motion.div>
           </div>
         </section>
 
-        {/* AI Automation Section (Under Construction) */}
-        <section className="py-24 px-6 md:px-8 border-t border-border">
+        {/* AI Automation Section */}
+        <section className="py-16 sm:py-24 px-4 sm:px-6 md:px-8 border-t border-border">
           <div className="max-w-7xl mx-auto flex flex-col items-center text-center space-y-8">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -248,16 +201,16 @@ export default function PortfolioPage() {
               viewport={{ once: true }}
               className="space-y-4"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#D39BC2]/15 dark:bg-[#D39BC2]/5 border border-[#D39BC2]/25 rounded-full">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#D39BC2]/10 border border-[#D39BC2]/25 rounded-full">
                 <div className="w-1.5 h-1.5 bg-[#D39BC2]/50 rounded-full animate-pulse" />
                 <span className="text-[9px] font-black text-muted-foreground uppercase tracking-[0.2em]">Under Construction</span>
               </div>
 
               <h2 className="text-2xl md:text-3xl font-black tracking-tighter text-foreground">
-                <ShinyText text="AI AUTOMATION IN N8N" speed={2} delay={0.5} color={isDarkMode ? '#7a4d6e' : '#6b2d5e'} shineColor="#ffffff" spread={60} className="font-black" />
+                <ShinyText text="AI AUTOMATION IN N8N" speed={2} delay={0.5} color="#1a0812" shineColor="#c084fc" spread={60} className="font-black" />
               </h2>
 
-              <p className="text-sm text-muted-foreground max-w-lg mx-auto leading-relaxed font-medium">
+              <p className="text-sm text-foreground/60 max-w-lg mx-auto leading-relaxed font-semibold">
                 Architecting intelligent, multi-agent workflows and modular automated
                 systems with n8n to revolutionize digital processes through advanced AI orchestration.
               </p>
@@ -265,14 +218,14 @@ export default function PortfolioPage() {
           </div>
         </section>
 
-        {/* Minimal Footer */}
-        <footer className="py-20 md:py-32 px-6 md:px-8 border-t border-border bg-card/40 backdrop-blur-md">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-16 md:gap-0">
+        {/* Footer */}
+        <footer className="py-16 sm:py-24 md:py-32 px-4 sm:px-6 md:px-8 border-t border-border bg-white/40 backdrop-blur-md">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 md:gap-0">
             <div className="text-center md:text-left space-y-4">
               <div className="text-xl md:text-2xl font-black tracking-tighter text-foreground">
-                <ShinyText text="GOKULNATH" speed={3} color={isDarkMode ? '#7a4d6e' : '#6b2d5e'} shineColor="#ffffff" spread={55} className="font-black" /><span className="text-muted-foreground">.</span>
+                <ShinyText text="GOKULNATH" speed={3} color="#1a0812" shineColor="#c084fc" spread={55} className="font-black" /><span className="text-foreground/40">.</span>
               </div>
-              <div className="text-[10px] md:text-xs text-muted-foreground/60 font-extrabold tracking-[0.3em] uppercase">
+              <div className="text-[10px] md:text-xs text-foreground/40 font-semibold tracking-[0.3em] uppercase">
                 © 2026 / Software Engineer & Designer
               </div>
             </div>
@@ -313,21 +266,21 @@ export default function PortfolioPage() {
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="bg-card w-full max-w-5xl rounded-[2.5rem] md:rounded-[3.5rem] p-6 md:p-12 relative border border-border max-h-[90vh] flex flex-col gap-8 md:gap-10"
+              className="bg-white w-full max-w-5xl rounded-[2.5rem] md:rounded-[3.5rem] p-6 md:p-12 relative border border-[#D39BC2]/30 max-h-[90vh] flex flex-col gap-8 md:gap-10 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center px-2">
                 <div className="space-y-1">
                   <h2 className="text-2xl md:text-4xl font-black tracking-tighter text-foreground">
-                    <ShinyText text="CURRICULUM VITAE" speed={2} color={isDarkMode ? '#7a4d6e' : '#6b2d5e'} shineColor="#ffffff" spread={60} className="font-black" />
+                    <ShinyText text="CURRICULUM VITAE" speed={2} color="#1a0812" shineColor="#c084fc" spread={60} className="font-black" />
                   </h2>
-                  <p className="text-muted-foreground font-bold text-[10px] md:text-xs uppercase tracking-[0.2em]">P. Gokulnath / Resume</p>
+                  <p className="text-foreground/50 font-semibold text-[10px] md:text-xs uppercase tracking-[0.2em]">P. Gokulnath / Resume</p>
                 </div>
                 <motion.button
                   whileHover={{ scale: 1.1, rotate: 90 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => setIsResumeOpen(false)}
-                  className="w-10 h-10 md:w-14 md:h-14 bg-muted rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground border border-border transition-all"
+                  className="w-10 h-10 md:w-14 md:h-14 bg-[#D39BC2]/10 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground border border-[#D39BC2]/20 transition-all"
                 >
                   <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
@@ -335,7 +288,7 @@ export default function PortfolioPage() {
                 </motion.button>
               </div>
 
-              <div className="bg-white rounded-2xl md:rounded-[2rem] overflow-hidden flex-1 shadow-2xl">
+              <div className="bg-white rounded-2xl md:rounded-[2rem] overflow-hidden flex-1 shadow-xl border border-[#D39BC2]/10 overflow-y-auto">
                 <img
                   src={resumeImage}
                   alt="P. Gokulnath Resume"
@@ -363,6 +316,6 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
 
-    </div >
+    </div>
   );
 }
