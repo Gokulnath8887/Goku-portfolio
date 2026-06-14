@@ -24,12 +24,6 @@ const projects: Project[] = [
     link: "https://eppo-varum-bus-tracker.vercel.app",
     image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&auto=format&fit=crop",
   },
-  {
-    title: "Dazzle Deals",
-    description: "Integrated e-commerce platform with admin panel and database.",
-    link: "https://dazzle-deals.vercel.app",
-    image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1200&auto=format&fit=crop",
-  },
 ]
 
 export function ProjectShowcase() {

@@ -12,8 +12,8 @@ export const links = () => [];
 
 export const meta = () => {
   return [
-    { title: "P GOKULNATH | FULLSTACK DEVELOPER | DIGITAL MARKETER" },
-    { name: "description", content: "Portfolio of P Gokulnath - Fullstack Developer & Digital Marketer" }
+    { title: "P GOKULNATH | FULLSTACK | AUTOMATION | DIGITAL MARKETER" },
+    { name: "description", content: "Portfolio of P Gokulnath - Fullstack Developer, Automation Specialist & Digital Marketer" }
   ];
 };
 
@@ -23,7 +23,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>P GOKULNATH | FULLSTACK DEVELOPER | DIGITAL MARKETER</title>
+        <title>P GOKULNATH | FULLSTACK | AUTOMATION | DIGITAL MARKETER</title>
         <Meta />
         <Links />
         <link rel="icon" href="/favicon.jpg" />
