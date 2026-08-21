@@ -42,3 +42,4 @@ export function LogoCloud({ logos, className, ...props }: LogoCloudProps) {
         </div>
     );
 }
+

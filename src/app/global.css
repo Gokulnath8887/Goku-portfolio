@@ -59,6 +59,8 @@
     scroll-behavior: smooth;
     min-height: 100vh;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* All headings: bold black baseline */

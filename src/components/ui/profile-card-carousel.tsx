@@ -90,7 +90,7 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                         >
                             <div className='mb-8'>
                                 <h2 className='text-3xl font-black text-foreground mb-2 tracking-tight'>
-                                    <ShinyText text={currentSlide.name} speed={2} color="#1a0812" shineColor="#c084fc" spread={55} className="font-black" />
+                                    <ShinyText text={currentSlide.name} speed={1} color="#1a0812" shineColor="#c084fc" spread={120} className="font-black" />
                                 </h2>
 
                                 <p className='text-xs font-semibold tracking-widest uppercase text-foreground/50'>
@@ -166,7 +166,7 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
                             transition={{ duration: 0.4, ease: "easeInOut" }}
                         >
                             <h2 className='text-2xl font-black text-foreground mb-2 tracking-tight'>
-                                <ShinyText text={currentSlide.name} speed={2} color="#1a0812" shineColor="#c084fc" spread={55} className="font-black" />
+                                <ShinyText text={currentSlide.name} speed={1} color="#1a0812" shineColor="#c084fc" spread={120} className="font-black" />
                             </h2>
 
                             <p className='text-[10px] font-semibold tracking-widest uppercase text-foreground/45 mb-6'>
@@ -233,3 +233,4 @@ export function ProfileCarousel({ slides, className }: ProfileCarouselProps) {
         </div>
     );
 }
+

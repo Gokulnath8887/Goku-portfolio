@@ -1,4 +1,4 @@
-import GlareHover from "./GlareHover"
+
 import { motion } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
 import React from "react"
@@ -31,8 +31,7 @@ export function ProjectShowcase() {
     <section className="relative w-full py-8 overflow-hidden bg-background/50">
       <div className="max-w-7xl mx-auto px-6">
         <h2 className="text-4xl md:text-7xl font-black tracking-tighter text-foreground uppercase text-center mb-12 leading-none">
-          <ShinyText text="PROJECTS" speed={2} color="#1a0812" shineColor="#c084fc" spread={55} className="font-black" /> <br className="md:hidden" />
-          <ShinyText text="LIVE PRODUCTION" speed={2.5} delay={1} color="#1a0812" shineColor="#D39BC2" spread={55} className="font-black" />
+          <ShinyText text="DEPLOYMENTS" speed={1} color="#1a0812" shineColor="#c084fc" spread={120} className="font-black" />
         </h2>
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-6">
@@ -48,18 +47,8 @@ export function ProjectShowcase() {
               transition={{ delay: index * 0.1, duration: 0.6 }}
               className="group"
             >
-              <GlareHover
-                width="100%"
-                height="480px"
-                borderRadius="2.5rem"
-                background="hsl(var(--card))"
-                borderColor="hsl(var(--border))"
-                glareColor="#ffffff"
-                glareOpacity={0.4}
-                glareSize={200}
-                className="max-w-[340px] shadow-2xl hover:shadow-[#D39BC2]/20 transition-all duration-500"
-              >
-                <div className="relative w-full h-full overflow-hidden flex flex-col">
+              <div className="w-full h-[480px] rounded-[2.5rem] bg-card border border-border max-w-[340px] shadow-2xl hover:shadow-[#D39BC2]/20 transition-all duration-500">
+                <div className="relative w-full h-full overflow-hidden flex flex-col rounded-[2.5rem]">
                   {/* Project Image */}
                   <div className="relative h-2/3 w-full overflow-hidden">
                     <img
@@ -74,7 +63,7 @@ export function ProjectShowcase() {
                   <div className="p-8 flex-1 flex flex-col justify-end bg-gradient-to-b from-transparent to-black/20">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-2xl font-black tracking-tight text-white uppercase leading-none">
-                        <ShinyText text={project.title} speed={2} color="#f0f0f0" shineColor="#ffffff" spread={55} className="font-black" />
+                        <ShinyText text={project.title} speed={1} color="#f0f0f0" shineColor="#ffffff" spread={120} className="font-black" />
                       </h3>
                       <ArrowUpRight className="text-[#D39BC2] opacity-0 group-hover:opacity-100 -translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300" />
                     </div>
@@ -83,7 +72,7 @@ export function ProjectShowcase() {
                     </p>
                   </div>
                 </div>
-              </GlareHover>
+              </div>
             </motion.a>
           ))}
         </div>
@@ -91,4 +80,5 @@ export function ProjectShowcase() {
     </section>
   )
 }
+
 

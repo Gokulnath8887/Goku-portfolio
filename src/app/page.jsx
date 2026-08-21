@@ -182,7 +182,7 @@ export default function PortfolioPage() {
               </div>
 
               <h2 className="text-2xl md:text-3xl font-black tracking-tighter text-foreground">
-                <ShinyText text="DIGITAL MARKETING" speed={2} color="#1a0812" shineColor="#c084fc" spread={60} className="font-black" />
+                <ShinyText text="DIGITAL MARKETING" speed={1} color="#1a0812" shineColor="#c084fc" spread={120} className="font-black" />
               </h2>
 
               <p className="text-sm text-foreground/60 max-w-lg mx-auto leading-relaxed font-semibold">
@@ -207,7 +207,7 @@ export default function PortfolioPage() {
               </div>
 
               <h2 className="text-2xl md:text-3xl font-black tracking-tighter text-foreground">
-                <ShinyText text="AI AUTOMATION IN N8N" speed={2} delay={0.5} color="#1a0812" shineColor="#c084fc" spread={60} className="font-black" />
+                <ShinyText text="AI AUTOMATION IN N8N" speed={1} delay={0.5} color="#1a0812" shineColor="#c084fc" spread={120} className="font-black" />
               </h2>
 
               <p className="text-sm text-foreground/60 max-w-lg mx-auto leading-relaxed font-semibold">
@@ -223,7 +223,7 @@ export default function PortfolioPage() {
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 md:gap-0">
             <div className="text-center md:text-left space-y-4">
               <div className="text-xl md:text-2xl font-black tracking-tighter text-foreground">
-                <ShinyText text="GOKULNATH" speed={3} color="#1a0812" shineColor="#c084fc" spread={55} className="font-black" /><span className="text-foreground/40">.</span>
+                <ShinyText text="GOKULNATH" speed={1.5} color="#1a0812" shineColor="#c084fc" spread={120} className="font-black" /><span className="text-foreground/40">.</span>
               </div>
               <div className="text-[10px] md:text-xs text-foreground/40 font-semibold tracking-[0.3em] uppercase">
                 © 2026 / Software Engineer & Designer
@@ -272,7 +272,7 @@ export default function PortfolioPage() {
               <div className="flex justify-between items-center px-2">
                 <div className="space-y-1">
                   <h2 className="text-2xl md:text-4xl font-black tracking-tighter text-foreground">
-                    <ShinyText text="CURRICULUM VITAE" speed={2} color="#1a0812" shineColor="#c084fc" spread={60} className="font-black" />
+                    <ShinyText text="CURRICULUM VITAE" speed={1} color="#1a0812" shineColor="#c084fc" spread={120} className="font-black" />
                   </h2>
                   <p className="text-foreground/50 font-semibold text-[10px] md:text-xs uppercase tracking-[0.2em]">P. Gokulnath / Resume</p>
                 </div>
@@ -319,3 +319,4 @@ export default function PortfolioPage() {
     </div>
   );
 }
+

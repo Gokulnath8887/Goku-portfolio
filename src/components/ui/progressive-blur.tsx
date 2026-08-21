@@ -58,3 +58,4 @@ export function ProgressiveBlur({
         </div>
     );
 }
+

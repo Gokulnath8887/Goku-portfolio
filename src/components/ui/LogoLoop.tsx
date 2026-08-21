@@ -84,15 +84,7 @@ const useAnimationLoop = (
     const track = trackRef.current;
     if (!track) return;
 
-    const prefersReduced =
-      typeof window !== 'undefined' &&
-      window.matchMedia &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (prefersReduced) {
-      track.style.transform = isVertical ? 'translate3d(0, 0, 0)' : 'translate3d(0, 0, 0)';
-      return;
-    }
+    const prefersReduced = false;
 
     const seqSize = isVertical ? seqHeight : seqWidth;
     if (seqSize <= 0 || targetVelocity <= 0) return;
@@ -465,3 +457,4 @@ export const LogoLoop = memo(
 LogoLoop.displayName = 'LogoLoop';
 
 export default LogoLoop;
+
